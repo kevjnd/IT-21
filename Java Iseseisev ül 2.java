@@ -1,9 +1,8 @@
 //Iseseisev ülesanne 2
 
-
 import java.util.Random;
 
-public class Iseseisev2{
+class Iseseisev2{
 
 	public static void main(String args[])
 	{
@@ -13,6 +12,6 @@ public class Iseseisev2{
         //Genereerib suva arvu vahemikus 0-999
 		int rand_int1 = rand.nextInt(1000);
 		// Väljastab suva arvu
-		System.out.println("Random Integers: "+rand_int1);
+		System.out.println("Suva arv: "+rand_int1);
     }
 }
