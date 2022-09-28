@@ -9,8 +9,8 @@ class Iseseisev2{
 		
 		Random rand = new Random();
 
-        //Genereerib suva arvu vahemikus 0-999
-		int rand_int1 = rand.nextInt(1000);
+        //Genereerib suva arvu vahemikus 0-6
+		int rand_int1 = rand.nextInt(7);
 		// Väljastab suva arvu
 		System.out.println("Suva arv: "+rand_int1);
     }
