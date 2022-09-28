@@ -1,4 +1,4 @@
-//Iseseisev ülesanne 25
+//Iseseisev ülesanne 21
 class Iseseisev21 {
   
     public static void main(String[] args) {
