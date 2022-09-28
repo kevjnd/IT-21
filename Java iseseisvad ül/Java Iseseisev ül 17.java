@@ -1,17 +1,13 @@
-import java.util.Scanner;
+//Iseseisev ülesanne 17
 
-class EvenOdd {
-
-    public static void main(String[] args) {
-
-        Scanner reader = new Scanner(System.in);
-
-        System.out.print("Sisestage number: ");
-        int num = reader.nextInt();
-
-        if(num % 2 == 0)
-            System.out.println(num + " Paarisarv");
-        else
-            System.out.println(num + " Paarituarv");
-    }
-}
+class OddEvenInArrayExample{  
+    public static void main(String args[]){  
+    int a[]={3,5,4,12,5};  
+  
+    System.out.println("Paarisarvud:");  
+    for(int i=0;i<a.length;i++){  
+    if(a[i]%2==0){  
+    System.out.println(a[i]);  
+    }  
+    }  
+    }}  
