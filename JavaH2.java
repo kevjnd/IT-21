@@ -2,52 +2,73 @@
 
 import java.util.Scanner;
 
-import javax.swing.SpringLayout;
+class JavaH2 {
 
-//1. Teisendab tollid meetriteks
-public class JavaH2 {
-
-    public static void main(String[] args) {
-    teisendamine();
-    ellips();
-    aeg();
-    float sportlane1 = sportlane();
-    float sportlane2 = sportlane();
-    System.out.println(sportlane2);
-    
+    //Põhiprogramm
+    public static void main(String[]args) {
+        //1.
+        teisendamine();
+        //2.
+        float a = 5, b = 4;
+        ellips(a, b);
+        //3.
+        teisendamine2();
+        //4.
+        float sportlane1 = sportlane();
+        float sportlane2 = sportlane();
+        System.out.println("Sportlase 1 kiirus on: " + sportlane1 +" km/h");
+        System.out.println("Sportlase 2 kiirus on: " + sportlane2 +" km/h");
+        float vahe = sportlane1 - sportlane2;
+        System.out.println("Sportlaste vahe on: " + vahe);
+        
     }
-
-    public static void teisendamine(){
+    
+    //1. Alamprogramm teisendab tollid meetriteks ja kuvab vastuse
+    public static void teisendamine() {
         double meeter;
         int toll = 1;
         meeter = toll/39.37;
         System.out.println(toll + " tolli = " + meeter + " meetrit");
-
+        
     }
 
-    //2. Leiab ellipsi pindala
-    public static void ellips(){
+    //2. Alamprogramm ellipsi pindala leidmiseks. Ümarda vastus kaks komakohta
+    public static void ellips( float a, float b)
+    {
+        float pindala;
 
+        pindala = (float) (Math.PI) * a * b ;
 
+        double ymardamine = Math.round(pindala*100)/100;
+         
+        System.out.println("Ellipsi pindala: " + ymardamine);
     }
 
-    //3. Teisendab minutid tundideks
-    public static void aeg(){
-        double tund;
-        int minut = 60;
-        tund = minut/60;
-        System.out.println(minut + " minutit = " + tund + " tundi");
+    //3. Alamprogramm, mis teisendab etteantud minutid tundideks ja minutiteks.
+    public static void teisendamine2() {
+        int t = 85;
+
+        int tunnid = t / 60;
+        int minutid = t % 60;
+        System.out.printf("Tunnid ja minutid: %d:%02d \n", tunnid, minutid);
     }
-    
-    //4. Leiab sportlase kiiruse
+
+    //4. Alamprogramm aitab leida kahe sportlase kiiruse
+
     public static float sportlane(){
         Scanner in = new Scanner(System.in);
-        System.out.print("Sisesta aeg: ");
+
+        //Küsitakse aega
+        System.out.print("Sisesta aeg(h): ");
         int aeg = in.nextInt();
-        System.out.print("Sisesta distants: ");
+
+        //Küsitakse distantsi
+        System.out.print("Sisesta distants(km): ");
         int distants = in.nextInt();
-        float kiirus1 = (float)distants / aeg;
-        return kiirus1;
+
+        //Leitakse sportlaste kiirus
+        float kiirus = (float)distants / aeg;
+        return kiirus;
+
     }
-    }
-    
+}
