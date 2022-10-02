@@ -56,19 +56,19 @@ class JavaH2 {
     //4. Alamprogramm aitab leida kahe sportlase kiiruse
 
     public static float sportlane(){
-        Scanner in = new Scanner(System.in);
+        try (Scanner in = new Scanner(System.in)) {
+            //Küsitakse aega
+            System.out.print("Sisesta aeg(h): ");
+            int aeg = in.nextInt();
 
-        //Küsitakse aega
-        System.out.print("Sisesta aeg(h): ");
-        int aeg = in.nextInt();
+            //Küsitakse distantsi
+            System.out.print("Sisesta distants(km): ");
+            int distants = in.nextInt();
 
-        //Küsitakse distantsi
-        System.out.print("Sisesta distants(km): ");
-        int distants = in.nextInt();
-
-        //Leitakse sportlaste kiirus
-        float kiirus = (float)distants / aeg;
-        return kiirus;
+            //Leitakse sportlaste kiirus
+            float kiirus = (float)distants / aeg;
+            return kiirus;
+        }
 
     }
 }

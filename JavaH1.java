@@ -1,6 +1,6 @@
 //Harjutus 1
 
-public class JavaH1 {
+class JavaH1 {
   
     public static void main(String[] args) {
     String eesnimi = new String();
