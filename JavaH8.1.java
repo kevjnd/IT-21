@@ -4,14 +4,14 @@ import java.util.Scanner;
 
 class Ruumalad {
 
-    //Programm risttahuka jaoks
+    //Programm risttahuka ruumala jaoks
 	public static int risttahukas(int a, int b, int c) {
 		int rist = a*b*c;
 		
 		return rist;
 	}
 	
-    //Programm kuubi jaoks
+    //Programm kuubi ruumala jaoks
 	public static int kuup(int a) {
 		int kuup = a*a*a;
 		
