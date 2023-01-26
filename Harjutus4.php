@@ -13,18 +13,34 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
     
-    <form action="#" method="get">
-        <div class="mb-3">
-            
-        </div>
-    </form>
+    <form method="get">
+    <label for="num1">Arv 1:</label>
+    <input type="text" id="num1" name="num1">
+    <br>
+    <label for="num2">Arv 2:</label>
+    <input type="text" id="num2" name="num2">
+    <br>
+    <input type="submit" value="Jaga">
+</form>
+
 
     <?php
-        //Harjutus3'
+        //Harjutus4
         //Kevin Joarand
-        //24.01.2023'
+        //24.01.2023
 
-
+    if (!empty($_GET['num1']) && !empty($_GET['num2'])) {
+    $num1 = $_GET['num1'];
+    $num2 = $_GET['num2'];
+    if ($num2 == 0) {
+        echo "<p>Ei saa jagada</p>";
+    } else {
+        $result = $num1 / $num2;
+        echo "<p>Vastus: $result</p>";
+    }
+    } elseif(empty($_GET['num1']) || empty($_GET['num2'])) {
+    echo "<p>Pole sisestatud arve.</p>";
+    }
 
     ?>
 </div>

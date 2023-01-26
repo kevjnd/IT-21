@@ -31,9 +31,9 @@
 
         
     <?php
-        //Harjutus3'
+        //Harjutus3
         //Kevin Joarand
-        //24.01.2023'
+        //24.01.2023
 
         //Trapetsi pindala
         
