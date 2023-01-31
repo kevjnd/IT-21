@@ -12,7 +12,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
-    
+  
+    <h3>Jagamine</h3>
     <form method="get">
         <label for="num1">Arv 1:</label>
         <input type="text" id="num1" name="num1">
@@ -23,6 +24,7 @@
         <input type="submit" value="Jaga" class="btn btn-success">
     </form>
 
+    <h3>Vanus</h3>
     <form method="get">
         <label for="vanus1">1. Vanus</label>
         <input type="text" id="vanus1" name="vanus1">
@@ -33,6 +35,7 @@
         <input type="submit" value="Võrdle" class="btn btn-danger">
     </form>
 
+    <h3>Ristkülik või Ruut</h3>
     <form method="get">
         <label for="pikkus">Pikkus:</label>
         <input type="text" id="pikkus" name="pikkus">
@@ -43,6 +46,7 @@
         <input type="submit" value="Otsusta" class="btn btn-primary">
     </form>
 
+    <h3>Ristkülik või ruut II</h3>
     <form method="get">
         <label for="length">Pikkus II: </label>
         <input type="text" id="length" name="length">
@@ -53,12 +57,14 @@
         <input type="submit" value="Joonista kujund" class="btn btn-outline-warning">
     </form>
 
+    <h3>Juubel</h3>
     <form method="get">
       <label for="saasta">Sünniaasta</label>
       <input type="text" id="saasta" name="saasta">
       <input type="submit" value="Kontrolli" class="btn btn-light">
     </form>
 
+    <h3>Hinne</h3>
     <form method="get">
     <label for="punktid">Punktid:</label>
     <input type="text" name="punktid" id="punktid">
