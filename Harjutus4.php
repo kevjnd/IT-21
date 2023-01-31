@@ -20,7 +20,7 @@
         <label for="num2">Arv 2:</label>
         <input type="text" id="num2" name="num2">
         <br>
-        <input type="submit" value="Jaga">
+        <input type="submit" value="Jaga" class="btn btn-success">
     </form>
 
     <form method="get">
@@ -30,7 +30,7 @@
         <label for="vanus2">2. Vanus</label>
         <input type="text" id="vanus2" name="vanus2">
         <br>
-        <input type="submit" value="Võrdle">
+        <input type="submit" value="Võrdle" class="btn btn-danger">
     </form>
 
     <form method="get">
@@ -40,7 +40,7 @@
         <label for="laius">Laius:</label>
         <input type="text" id="laius" name="laius">
         <br>
-        <input type="submit" value="Otsusta">
+        <input type="submit" value="Otsusta" class="btn btn-primary">
     </form>
 
     <form method="get">
@@ -50,7 +50,13 @@
         <label for="width">Laius II:</label>
         <input type="text" id="width" name="width">
         <br>
-        <input type="submit" value="Joonista kujund">
+        <input type="submit" value="Joonista kujund" class="btn btn-outline-warning">
+    </form>
+
+    <form method="post">
+      <label for="saasta">Sünniaasta</label>
+      <input type="text" id="saasta" name="saasta">
+      <input type="submit" value="Kontrolli" class="btn btn-secondary">
     </form>
 
     <?php
@@ -110,8 +116,22 @@
             echo "<div style='width: $length"."px; height: $width"."px; background-color: white; border: 1px solid black;'></div>";
         }
     } else {
-        echo "<p>Error: One or both inputs are empty</p>";
+        echo "<p>Joonistamiseks sisesta pikkus ja laius!</p>";
     }
+
+    //6. Juubel
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $saasta = $_POST['saasta'];
+        if (!empty($saasta)) {
+          if ($saasta % 50 == 0) {
+            echo "<p>$saasta on juubeliaasta.</p>";
+          } else {
+            echo "<p>$saasta pole juubeliaasta.</p>";
+          }
+        } else {
+          echo "<p>Sisesta sünniaasta!</p>";
+        }
+      }
 
 
     ?>
