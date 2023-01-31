@@ -53,12 +53,17 @@
         <input type="submit" value="Joonista kujund" class="btn btn-outline-warning">
     </form>
 
-    <form method="post">
+    <form method="get">
       <label for="saasta">Sünniaasta</label>
       <input type="text" id="saasta" name="saasta">
-      <input type="submit" value="Kontrolli" class="btn btn-secondary">
+      <input type="submit" value="Kontrolli" class="btn btn-light">
     </form>
 
+    <form method="get">
+    <label for="punktid">Punktid:</label>
+    <input type="text" name="punktid" id="punktid">
+    <input type="submit" name="Lisa" value="Lisa" class="btn btn-outline-info">
+    </form>
     <?php
     //Harjutus4
     //Kevin Joarand
@@ -121,7 +126,7 @@
 
     //6. Juubel
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $saasta = $_POST['saasta'];
+        $saasta = $_GET['saasta'];
         if (!empty($saasta)) {
           if ($saasta % 50 == 0) {
             echo "<p>$saasta on juubeliaasta.</p>";
@@ -133,7 +138,23 @@
         }
       }
 
-
+      //7. Hinne
+      if (isset($_GET['Lisa'])) {
+        $punktid = $_GET['punktid'];
+        switch ($punktid) {
+          case ($punktid >= 10):
+            echo "SUPER!";
+            break;
+          case ($punktid >= 5 && $punktid < 10):
+            echo "DONE!";
+            break;
+          case ($punktid < 5):
+            echo "KASIN!";
+            break;
+          default:
+            echo "SISESTA OMA PUNKTID!";
+        }
+      }
     ?>
 </div>
 </body>
