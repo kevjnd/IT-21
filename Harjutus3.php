@@ -19,12 +19,12 @@
         <input type="number" name="a" required><br>
         <input type="number" name="b" required><br>
         <input type="number" name="c" required><br>
-        <input type="submit" value="Arvuta" class="btn btn-success" required><br>
+        <input type="submit" value="Arvuta" class="btn btn-success"><br>
     </form>
     <h3>Arvuta rombi ümbermõõt</h3>
     <form action="#" method="get" class="form-grouo">
         <input type="number" name="r1" required><br>
-        <input type="submit" value="Arvuta" class="btn btn-success" required><br>
+        <input type="submit" value="Arvuta" class="btn btn-success"><br>
 
 
     
