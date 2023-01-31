@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="et">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -36,13 +36,14 @@
         //24.01.2023
 
         //Trapetsi pindala
-        
+        if (isset($_GET['a']) && isset($_GET['b']) && isset($_GET['c']) && isset($_GET['s']))
         $arv1 = $_GET['a'];
         $arv2 = $_GET['b'];
         $arv3 = $_GET['c'];
         $s = $arv1 + $arv2 * $arv3 / 2;
         
         //Rombi ümbermõõt
+        if (isset($_GET['r1']))
         $r1 = $_GET['r1'];
         $p = $r1 * 4;
 

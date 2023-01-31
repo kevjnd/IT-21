@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="et">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,6 +17,9 @@
         //Harjutus5
         //Kevin Joarand
         //31.01.2023
+
+        //Tüdrukud
+
 
 
     ?>
