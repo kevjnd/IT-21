@@ -16,21 +16,21 @@
     <h3>Jagamine</h3>
     <form method="get">
         <label for="num1">Arv 1:</label>
-        <input type="text" id="num1" name="num1">
+        <input type="text" id="num1" name="num1" placeholder="Arv 1">
         <br>
         <label for="num2">Arv 2:</label>
-        <input type="text" id="num2" name="num2">
+        <input type="text" id="num2" name="num2" placeholder="Arv 2">
         <br>
         <input type="submit" value="Jaga" class="btn btn-success">
     </form>
 
     <h3>Vanus</h3>
     <form method="get">
-        <label for="vanus1">1. Vanus</label>
-        <input type="text" id="vanus1" name="vanus1">
+        <label for="vanus1">1. Vanus:</label>
+        <input type="text" id="vanus1" name="vanus1" placeholder="Vanus 1">
         <br>
-        <label for="vanus2">2. Vanus</label>
-        <input type="text" id="vanus2" name="vanus2">
+        <label for="vanus2">2. Vanus:</label>
+        <input type="text" id="vanus2" name="vanus2" placeholder="Vanus 2">
         <br>
         <input type="submit" value="Võrdle" class="btn btn-danger">
     </form>
@@ -38,10 +38,10 @@
     <h3>Ristkülik või Ruut</h3>
     <form method="get">
         <label for="pikkus">Pikkus:</label>
-        <input type="text" id="pikkus" name="pikkus">
+        <input type="text" id="pikkus" name="pikkus" placeholder="Pikkus">
         <br>
         <label for="laius">Laius:</label>
-        <input type="text" id="laius" name="laius">
+        <input type="text" id="laius" name="laius" placeholder="Laius">
         <br>
         <input type="submit" value="Otsusta" class="btn btn-primary">
     </form>
@@ -49,25 +49,25 @@
     <h3>Ristkülik või ruut II</h3>
     <form method="get">
         <label for="length">Pikkus II: </label>
-        <input type="text" id="length" name="length">
+        <input type="text" id="length" name="length" placeholder="Pikkus II">
         <br>
         <label for="width">Laius II:</label>
-        <input type="text" id="width" name="width">
+        <input type="text" id="width" name="width" placeholder="Laius II">
         <br>
         <input type="submit" value="Joonista kujund" class="btn btn-outline-warning">
     </form>
 
     <h3>Juubel</h3>
     <form method="get">
-      <label for="saasta">Sünniaasta</label>
-      <input type="text" id="saasta" name="saasta">
+      <label for="saasta">Sünniaasta:</label>
+      <input type="text" id="saasta" name="saasta" placeholder="Sünniaasta">
       <input type="submit" value="Kontrolli" class="btn btn-light">
     </form>
 
     <h3>Hinne</h3>
     <form method="get">
     <label for="punktid">Punktid:</label>
-    <input type="text" name="punktid" id="punktid">
+    <input type="text" name="punktid" id="punktid" placeholder="Punktid">
     <input type="submit" name="Lisa" value="Lisa" class="btn btn-outline-info">
     </form>
     <?php
