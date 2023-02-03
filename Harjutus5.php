@@ -61,9 +61,56 @@
         "1N6AA0CJ1D57470", "WAUEG98E76A780908", "WAUAF78E96A920706", "1GT01XEG8FZ268942", "1FTEW1CW4AF371278", "JN1AZ4EH8DM531691", "WAUEKAFBXAN294295", 
         "1N6AA0EDXFN868772", "WBADW3C59DJ422810");
 
-        $autoarv = array_count_values($margid);
-        echo $autoarv;
+        echo "<h5>Autode arv</h5>";
+        $loend = array_count_values($margid);
+        echo "Autosid on kokku: " . count($margid)."<br>";
+        
+        echo "<h5>Massiivi pikkused</h5>";
+        if (count($margid) == count($VIN)){
+          echo "Massiivid on sama pikad."."<br>";
+        } else {
+          echo "Massiividel on erinev pikkus."."<br>";
+        }
 
+        echo "<h5>Toyota ja Audi arv</h5>";
+        $toyota_loend = 0;
+        $audi_loend = 0;
+
+        foreach ($margid as $auto) {
+          if ($auto == 'Toyota') {
+            $toyota_loend++;
+          }
+          if ($auto == 'Audi') {
+            $audi_loend++;
+          }
+        }
+
+        echo "Toyotade arv: " . $toyota_loend ."<br>";
+        echo "Audide arv: " . $audi_loend ."<br>";
+
+        echo "<h5>VIN koodid</h5>";
+        foreach ($VIN as $mark) {
+          if (strlen($mark) < 17) {
+            echo $mark . "\n";
+          }
+        }
+        //Keskmised palgad
+        echo "<h3>Keskmised palgad</h3>";
+        $palgad = array(1220,1213,1295,1312,1298,1354,1296,1286,1292,1327,1369,1455);
+        $kokku = array_sum($palgad);
+        $ploend = count($palgad);
+        $keskmine = $kokku/$ploend;
+
+        echo "2018 Palkade keskmine: " . $keskmine ."€";
+
+        //Firmad
+        echo "<h5>Firma nimedes massiiv</h5>";
+        $firmad = array("Kimia","Mynte","Voomm","Twiyo","Layo","Talane","Gigashots","Tagchat","Quaxo","Voonyx","Kwilith","Edgepulse","Eidel","Eadel","Jaloo","Oyope","Jamia");
+        sort($firmad);
+
+        foreach ($firmad as $firma) {
+            echo $firma . "<br>";
+        }
 
     ?>
 </div>
