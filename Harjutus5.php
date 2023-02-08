@@ -13,6 +13,17 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
     
+    <form action ="#" method="get">
+      <label for="fnimi">Firma nimi:</label>
+      <input type="text" id="fnimi" name="fnimi">
+      <input type="submit" name="eemalda" value="Eemalda">
+    </form>
+
+    <h3>Otsingumootor</h3>
+    <form action="#" method="get">
+      <input type="text" name="nimi" placeholder="Sisesta nimi">
+      <button><input type="submit" class="btn btn-primary" name="otsing" value="Otsi"></button>
+    </form>
 
     <?php
         //Harjutus5
@@ -104,14 +115,68 @@
         echo "2018 Palkade keskmine: " . $keskmine ."€";
 
         //Firmad
-        echo "<h5>Firma nimedes massiiv</h5>";
+        echo "<h3>Firmad</h3>";
         $firmad = array("Kimia","Mynte","Voomm","Twiyo","Layo","Talane","Gigashots","Tagchat","Quaxo","Voonyx","Kwilith","Edgepulse","Eidel","Eadel","Jaloo","Oyope","Jamia");
         sort($firmad);
 
+        if(isset($_GET["eemalda"])){
+          $fnimi = $_GET["fnimi"];
+          if(($k = array_search($fnimi, $firmad)) !== false) {
+              unset($firmad[$k]);
+          }
+          sort($firmad);
+        }
         foreach ($firmad as $firma) {
-            echo $firma . "<br>";
+          echo "<li>$firma</li>";
         }
 
+        //Riigid
+        echo "<h3>Riigid</h3>";
+        $riigid = array("Indonesia","Canada","Kyrgyzstan","Germany","Philippines",
+        "Philippines","Canada","Philippines","South Sudan","Brazil",
+        "Democratic Republic of the Congo","Indonesia","Syria","Sweden",
+        "Philippines","Russia","China","Japan","Brazil","Sweden","Mexico","France",
+        "Kazakhstan","Cuba","Portugal","Czech Republic");
+
+        $a = 0;
+        $b = 0;
+        foreach ($riigid as $riik) {
+          if (strlen($riik) > $b) {
+            $b = strlen($riik);
+            $a = $riik;
+          }
+        }
+
+        echo "Kõige pikema riigi nime märkide arv on: $a - $b Märki";
+
+        //Hiina nimed
+        echo "<h3>Hiina nimed</h3>";
+        $hnimed = array("瀚聪","月松","雨萌","展博","雪丽","哲恒","慧妍","博裕","宸瑜","奕漳",
+        "思宏","伟菘","彦歆","睿杰","尹智","琪煜","惠茜","晓晴","志宸","博豪",
+        "璟雯","崇杉","俊誉","军卿","辰华","娅楠","志宸","欣妍","明美");
+        sort($hnimed);
+
+        echo "Esimene nimi: " . $hnimed[0] . "<br>";
+        echo "Viimane nimi: " . end($hnimed) . "<br>";
+
+        //Google
+        echo "<h3>Google</h3>";
+        if (isset($_GET["otsing"])) {
+          $nimi = $_GET["nimi"];
+          $nimed = array("Feake","Bradwell","Dreger","Bloggett","Lambole","Daish","Lippiett",
+          "Blackie","Stollenbeck","Houseago","Dugall","Sprowson","Kitley","Mcenamin",
+          "Allchin","Doghartie","Brierly","Pirrone","Fairnie","Seal","Scoffins",
+          "Galer","Matevosian","DeBlase","Cubbin","Izzett","Ebi","Clohisey",
+          "Prater","Probart","Samwaye","Concannon","MacLure","Eliet","Kundt","Reyes");
+            
+          if (in_array($nimi, $nimed)) {
+            echo "<div class='alert alert-success mt-3' role='alert'>Nimi leitud!</div>";
+          } 
+          else {
+            echo "<div class='alert alert-danger mt-3' role='alert'>Nime ei leitud!</div>";
+          }
+        }
     ?>
 </div>
 </body>
+</html>
