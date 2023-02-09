@@ -77,44 +77,24 @@
         }
 
         //7. Massiivid ja tsüklid
-        echo "<h3>7. Massiivid ja tsüklid</h3>";
-        $tydrukud = array("Emma", "Olivia", "Ava", "Isabella", "Sophia");
-        $poisid = array("Liam", "Noah", "William", "James", "Oliver");
+        echo "<h3>7. Masiivid ja tsüklid</h3>";
+        $tydrukud = array("Emily", "Jessica", "Sarah", "Ashley");
+        $poisid = array("John", "Michael", "Eric", "David");
 
-        echo "<table>";
-        for ($i = 0; $i < count($tydrukud); $i++) {
-            echo "<tr>";
-            echo "<td>" . $tydrukud[$i] . "</td>";
-            echo "<td>" . $poisid[$i] . "</td>";
-            echo "</tr>";
-        }
-        echo "</table>";
-
-        //8. 
-
-        $boys = array("Jack", "James", "John", "Josh", "Jake");
-        $girls = array("Jane", "Jenny", "Joan", "Jessica", "Jill");
-
-        $all_names = array();
-
-        // Create a copy of boys and girls arrays
-        $copy_boys = $boys;
-        $copy_girls = $girls;
-
-        // Shuffle the copies of boys and girls arrays
-        shuffle($copy_boys);
-        shuffle($copy_girls);
-
-        // Combine the shuffled arrays and store in $all_names
-        for ($i = 0; $i < count($copy_boys); $i++) {
-          $all_names[] = $copy_boys[$i];
-          $all_names[] = $copy_girls[$i];
+        for ($i = 0; $i < count($poisid); $i++) {
+            echo $poisid[$i] . " - " . $tydrukud[$i] . "<br>";
         }
 
-        // Output the pairs of boys and girls
-        for ($i = 0; $i < count($all_names); $i += 2) {
-          echo $all_names[$i] . " & " . $all_names[$i + 1] . "<br>";
-        }
+        //8. Massiivid ja tsüklid (Bonus)
+        echo "<h3>8. Massiivid ja tsüklid (Bonus)</h3>";
+        $tydrukud = array("Mary", "Jane", "Emily", "Sophie");
+        $poisid = array("John", "Michael", "David", "Adam");
+
+        $tydrukud_copy = array_values(array_unique($tydrukud));
+        $poisid_copy = array_values(array_unique($poisid));
+
+        print_r($tydrukud_copy);
+        print_r($poisid_copy);
     ?>
   </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>

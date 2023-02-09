@@ -5,14 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Harjutus5</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
- 
-    <style>
-    .img-box {
-      width: 200px;
-      height: 200px;
-      margin: 20px;
-    }
-  </style>
   </head>
   <body>
 <div class="container"> 
@@ -195,7 +187,7 @@
     
         echo "<h5>Kolmas pilt:</h5>";
         echo "<div class='img-box'><img width='200' height='200'src='https://www.metshein.com/wp-content/uploads/2016/06/" . $pildid[2] . "' alt='" . $pildid[2] . "'></div>";
-    
+        
         echo "<h5>Kõik pildid:</h5>";
         echo "<div class='d-flex flex-wrap'>";
         foreach($pildid as $pilt) {
