@@ -5,14 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Harjutus5</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+ 
+    <style>
+    .img-box {
+      width: 200px;
+      height: 200px;
+      margin: 20px;
+    }
+  </style>
   </head>
   <body>
-    <div class="container"> 
+<div class="container"> 
     <h1>Harjutus5</h1>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
-    
+
     <form action ="#" method="get">
       <label for="fnimi">Firma nimi:</label>
       <input type="text" id="fnimi" name="fnimi">
@@ -32,7 +37,7 @@
 
         //Tüdrukud
         echo "<h3>Tüdrukud</h3>";
-        $tydrukud = array("Emma", "Olivia", "Ava", "Isabella", "Sophia", "Charlotte", "Mia", "Amelia");
+        $tydrukud = array("Allah","Muhameed","Rahmaan","Salam","Nikolai","Karen","Asasasasasa","Minni");
         sort($tydrukud);
         $loend = count($tydrukud);
         for ($i = 0; $i < $loend; $i++)
@@ -44,8 +49,8 @@
           echo $tydrukud[$i] . "<br>";
         }
         echo $tydrukud[$loend - 1] . "<br>";
-        $randomIndex = rand(0, $loend - 1);
-        echo $tydrukud[$randomIndex] . "<br>";
+        $suvanimi = rand(0, $loend - 1);
+        echo $tydrukud[$suvanimi] . "<br>";
 
         //Autod
         echo "<h3>Autod</h3>";
@@ -176,7 +181,32 @@
             echo "<div class='alert alert-danger mt-3' role='alert'>Nime ei leitud!</div>";
           }
         }
+
+        //Pildid
+
+        $pildid = array(
+          "devlin.jpg",
+          "freeland.jpg",
+          "gabriel.jpg",
+          "pete.jpg",
+          "peterus.jpg",
+          "prentice.jpg"
+        );
+    
+        echo "<h5>Kolmas pilt:</h5>";
+        echo "<div class='img-box'><img width='200' height='200'src='https://www.metshein.com/wp-content/uploads/2016/06/" . $pildid[2] . "' alt='" . $pildid[2] . "'></div>";
+    
+        echo "<h5>Kõik pildid:</h5>";
+        echo "<div class='d-flex flex-wrap'>";
+        foreach($pildid as $pilt) {
+          echo "<div class='img-box'><img width='200' height='200' src='https://www.metshein.com/wp-content/uploads/2016/06/" . $pilt . "' alt='" . $pilt . "'></div>";
+        }
+        echo "</div>";
     ?>
-</div>
+  </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+    
 </body>
 </html>
