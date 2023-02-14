@@ -17,7 +17,7 @@
   </form>
 
     <?php
-        //Harjutus5
+        //Harjutus7
         //Kevin Joarand
         //31.01.2023
 

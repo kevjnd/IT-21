@@ -29,8 +29,24 @@
         </div>
         <button type="submit" class="btn btn-primary">Sisesta</button>
         </form>
+
+        <form action="#" method="get">
+          Vali vahemiku algus: <input type="text" name="algus" />
+          Vali vahemiku lõpp: <input type="text" name="lopp" />
+          <input type="submit" name="submit" class="btn btn-primary" value="Kuva vahemik" />
+        </form>
+
+        <form method="get">
+        <label for="pikkus">Pikkus:</label>
+        <input type="number" name="pikkus" id="pikkus" required><br><br>
+
+        <label for="laius">Laius:</label>
+        <input type="number" name="laius" id="laius" required><br><br>
+
+        <input type="submit" value="Arvuta" class="btn btn-primary">
+        </form>
     <?php
-        //Harjutus5
+        //Harjutus 7
         //Kevin Joarand
         //31.01.2023
 
@@ -56,6 +72,28 @@
 
         //Arvud
         echo "<h3>Arvud</h3>";
+        if (isset($_GET['submit'])) {
+          $algus = $_GET['algus'];
+          $lopp = $_GET['lopp'];
+          for ($i = $algus; $i <= $lopp; $i++) {
+            echo  $i . ' ';
+          }
+        }
+
+        //Ristküliku pindala
+        echo "<h3>Ristküliku pindala</h3>";
+        if ($_SERVER["REQUEST_METHOD"] == "GET") {
+          $pikkus = $_GET["pikkus"];
+          $laius = $_GET["laius"];
+      
+          $pindala = $pikkus * $laius;
+      
+          echo "<br>Ristküliku pindala on: " . $pindala;
+        }
+
+        //Isikukood
+        echo "<h3>Isikukood</h3>";
+        
     ?>
   </div>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
