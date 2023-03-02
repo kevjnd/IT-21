@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="et">
   <head>
-    <meta charset="utf-8">
+    <meta synniaeget="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Harjutus7</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
@@ -45,6 +45,13 @@
 
         <input type="submit" value="Arvuta" class="btn btn-primary">
         </form>
+
+        <form method="get">
+            <label for="ikood">Sisesta isikukood</label>
+            <input type="number" name="isikukood" id="isikukood">
+            <button type="submit" class="btn btn-primary">Sisesta</button>
+        </form>
+
     <?php
         //Harjutus 7
         //Kevin Joarand
@@ -93,7 +100,38 @@
 
         //Isikukood
         echo "<h3>Isikukood</h3>";
-        
+        if ($_SERVER["REQUEST_METHOD"] == "GET") {
+          $ikood = $_GET["isikukood"];
+          if (strlen($ikood) == 11) {
+              echo "Isikukood on õige pikkusega<br>";
+          } else {
+              echo "Isikukood on vale pikkusega<br>";
+          }
+          if (substr($ikood, 0, 1) == 1 || substr($ikood, 0, 1) == 3 || substr($ikood, 0, 1) == 5) {
+            echo "Mees<br>";
+          } else {
+            echo "Naine<br>";
+          }
+          $ikood_subset = substr($ikood, 1, 6);
+          $ikood_subset_formatted = implode(".", str_split($ikood_subset, 2));
+          echo $ikood_subset_formatted;
+
+        }
+        //Head mõtted
+        echo "<h3>Head mõtted</h3>";
+        $alus = array("Goblin", "Koer", "Minni");
+        $öeldis = array("ütles", "karjus", "haukus");
+        $sihitis = array("Mwahhh", "Kus mu sokid on?", "UwU");
+
+        function yhepikkune($alus, $öeldis, $sihitis) {
+          $alussõna = $alus[array_rand($alus)];
+          $öeldissõna = $öeldis[array_rand($öeldis)];
+          $sihitissõna = $sihitis[array_rand($sihitis)];
+          return $alussõna . " " . $öeldissõna . " " . $sihitissõna;
+        }
+
+        echo yhepikkune($alus, $öeldis, $sihitis);
+
     ?>
   </div>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
