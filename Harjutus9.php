@@ -48,7 +48,7 @@
 
                 //Suured ja väikesed tähed läbisegi
                 echo "<h3>1. Suured ja väikesed tähed läbisegi</h3>";
-                if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+                if (isset($_GET['nimi'])) {
                     $nimi = $_GET['nimi'];
                     $nimi = ucfirst(strtolower($nimi));
                     echo "Tere $nimi!";
@@ -56,7 +56,7 @@
 
                 //Teksti iga tähe järgi lisada punkt
                 echo "<h3>2. Teksti iga tähe järgi lisada punkt</h3>";
-                if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+                if (isset($_GET['text'])) {
                     $text = $_GET['text'];
                     $tpikkus = strlen($text);
                     $ptekst = '';
@@ -70,7 +70,7 @@
                 
                 //Tekstiväli kuvab kasutaja sisestatud sõnumeid
                 echo "<h3>3. Tekstiväli kuvab kasutaja sisestatud sõnumeid</h3>";
-                if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+                if (isset($_GET['sonum'])) {
                     $sonum = $_GET['sonum'];
                     $tarnid = ['noob', 'roblox', 'koer'];
                     $kensoreeritud = $sonum;
@@ -85,7 +85,7 @@
 
                 //Eesnime ja perenime põhjal luuakse email lõpuga @hkhk.edu.ee.
                 echo "<h3>4. Eesnime ja perenime põhjal luuakse email lõpuga @hkhk.edu.ee.</h3>";
-                if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+                if (isset($_GET['enimi']) && isset($_GET['pnimi'])) {
                     $enimi = $_GET['enimi'];
                     $pnimi = $_GET['pnimi'];
                 
