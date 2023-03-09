@@ -89,7 +89,7 @@
 
         //Ristküliku pindala
         echo "<h3>Ristküliku pindala</h3>";
-        if ($_SERVER["REQUEST_METHOD"] == "GET") {
+        if (isset($_GET['pikkus']) && isset($_GET['laius'])) {
           $pikkus = $_GET["pikkus"];
           $laius = $_GET["laius"];
       
@@ -100,7 +100,7 @@
 
         //Isikukood
         echo "<h3>Isikukood</h3>";
-        if ($_SERVER["REQUEST_METHOD"] == "GET") {
+        if (isset($_GET['isikukood'])) {
           $ikood = $_GET["isikukood"];
           if (strlen($ikood) == 11) {
               echo "Isikukood on õige pikkusega<br>";

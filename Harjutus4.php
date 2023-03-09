@@ -76,7 +76,7 @@
     //24.01.2023
 
     //2. Jagamine
-    if (!empty($_GET['num1']) && !empty($_GET['num2'])) {
+    if (isset($_GET['num1']) && isset($_GET['num2'])) {
     $num1 = $_GET['num1'];
     $num2 = $_GET['num2'];
     if ($num2 == 0) {
@@ -85,12 +85,11 @@
         $result = $num1 / $num2;
         echo "<p>Vastus: $result</p>";
     }
-    } elseif(empty($_GET['num1']) || empty($_GET['num2'])) {
     echo "<p>Pole sisestatud arve.</p>";
     }
 
     //3. Vanus
-    if (!empty($_GET['vanus1']) && !empty($_GET['vanus2'])) {
+    if (isset($_GET['vanus1']) && isset($_GET['vanus2'])) {
         $vanus1 = $_GET['vanus1'];
         $vanus2 = $_GET['vanus2'];
         if ($vanus1 > $vanus2) {
@@ -105,7 +104,7 @@
     }
 
     //4. Ristkülik või ruut
-    if (!empty($_GET['pikkus']) && !empty($_GET['laius'])) {
+    if (isset($_GET['pikkus']) && isset($_GET['laius'])) {
         $pikkus = $_GET['pikkus'];
         $laius = $_GET['laius'];
         if ($pikkus == $laius) {
@@ -118,7 +117,7 @@
     }
     
     //5. Ristkülik või ruut II
-    if (!empty($_GET['length']) && !empty($_GET['width'])) {
+    if (isset($_GET['length']) && isset($_GET['width'])) {
         $length = $_GET['length'];
         $width = $_GET['width'];
         if ($length == $width) {
@@ -131,7 +130,7 @@
     }
 
     //6. Juubel
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_GET['saasta'])) {
         $saasta = $_GET['saasta'];
         if (!empty($saasta)) {
           if ($saasta % 50 == 0) {
