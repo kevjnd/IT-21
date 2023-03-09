@@ -54,7 +54,7 @@
                 } else {
                     $aastaajad = 'talv';
                 }
-                echo '<img src="https://hips.hearstapps.com/ghk.h-cdn.co/assets/18/12/spring-cherry-blossoms.jpg" alt="'.$aastaajad.' kevad">';
+                echo '<img width="250" heigth="250" src="https://hips.hearstapps.com/ghk.h-cdn.co/assets/18/12/spring-cherry-blossoms.jpg" alt="'.$aastaajad.' kevad">';
 
                 ?>
             </div>
