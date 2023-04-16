@@ -24,41 +24,37 @@
         //Kevin Joarand
         //02.04.2023õ
 
-        $uploadOk = 1;
-        $imageFileType = strtolower(pathinfo($_FILES["fileToUpload"]["name"],PATHINFO_EXTENSION));
-
-        // Check if image file is a actual image or fake image
         if(isset($_POST["submit"])) {
+            $uploadOk = 1;
+            $imageFileType = strtolower(pathinfo($_FILES["fileToUpload"]["name"],PATHINFO_EXTENSION));
+        
+            // Check if image file is a actual image or fake image
             $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-            if($check !== false) {
-                echo "File is an image - " . $check["mime"] . ".";
-                $uploadOk = 1;
-            } else {
+            if($check === false) {
                 echo "File is not an image.";
                 $uploadOk = 0;
             }
-        }
-
-        // Check if file already exists
-        if (file_exists($_FILES["fileToUpload"]["name"])) {
-            echo "Sorry, file already exists.";
-            $uploadOk = 0;
-        }
-
-        // Allow certain file formats
-        if($imageFileType != "jpg" && $imageFileType != "jpeg") {
-            echo "Sorry, only JPG, JPEG files are allowed.";
-            $uploadOk = 0;
-        }
-
-        // Check if $uploadOk is set to 0 by an error
-        if ($uploadOk == 0) {
-            echo "Sorry, your file was not uploaded.";
-        // if everything is ok, try to display file
-        } else {
-            $img_data = file_get_contents($_FILES["fileToUpload"]["tmp_name"]);
-            $base64 = 'data:image/' . $imageFileType . ';base64,' . base64_encode($img_data);
-            echo "<a href='$base64' target='_blank'><img src='$base64' alt='uploaded image' width='250' height='250'></a>";
+        
+            // Allow certain file formats
+            if($imageFileType != "jpg" && $imageFileType != "jpeg") {
+                echo "Sorry, only JPG, JPEG files are allowed.";
+                $uploadOk = 0;
+            }
+        
+            // Check if file already exists
+            if (file_exists($_FILES["fileToUpload"]["name"])) {
+                echo "Sorry, file already exists.";
+                $uploadOk = 0;
+            }
+        
+            // Check if $uploadOk is set to 0 by an error
+            if ($uploadOk == 0) {
+                echo "Sorry, your file was not uploaded.";
+            } else {
+                $img_data = file_get_contents($_FILES["fileToUpload"]["tmp_name"]);
+                $base64 = 'data:image/' . $imageFileType . ';base64,' . base64_encode($img_data);
+                echo "<a href='$base64' target='_blank'><img src='$base64' alt='uploaded image' style='width:100%; height:100%; object-fit:contain;'></a>";
+            }
         }
 
         ?>
