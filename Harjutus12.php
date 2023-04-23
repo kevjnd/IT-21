@@ -12,6 +12,7 @@
     <div class="container mt-5">
         <h1>Harjutus12</h1>
         
+		<h3>1. Sõiduaeg</h3>
         <form method="GET" action="#">
             <label for="start-time">Start Time (hh:mm):</label>
             <input type="text" id="start-time" name="start-time" minlength="5" required><br><br>
@@ -19,26 +20,6 @@
             <input type="text" id="end-time" name="end-time" minlength="5" required><br><br>
             <button type="submit">Calculate</button>
         </form>
-
-        <h1>Salary Comparison</h1>
-
-        <table>
-            <tr>
-                <th></th>
-                <th>Average Salary</th>
-                <th>Highest Salary</th>
-            </tr>
-            <tr>
-                <th>Men</th>
-                <td><?php echo number_format($avg_male_salary, 2); ?></td>
-                <td><?php echo number_format($max_male_salary, 2); ?></td>
-            </tr>
-            <tr>
-                <th>Women</th>
-                <td><?php echo number_format($avg_female_salary, 2); ?></td>
-                <td><?php echo number_format($max_female_salary, 2); ?></td>
-            </tr>
-        </table>
   
         <?php
 
@@ -70,44 +51,58 @@
 		}
 
         //2. Palkade võrdlus
-        // Open the CSV file
-		$file = fopen("C:/Users/kevin/Downloads/töötajad.csv", "r");
-		// Initialize variables
-		$total_male_salary = 0;
-		$total_female_salary = 0;
-		$count_male = 0;
-		$count_female = 0;
-		$max_male_salary = 0;
-		$max_female_salary = 0;
+        // Path to the CSV file
+		$file = 'C:/Users/kevin/Downloads/tootajad.csv';
 
-		// Read each line of the CSV file
-		while (($data = fgetcsv($file)) !== FALSE) {
-			$name = $data[0];
-			$gender = $data[1];
-			$salary = $data[2];
+		// Open the file and read its contents
+		$handle = fopen($file, "r");
+		$data = fgetcsv($handle, 1000, ";");
 
-			// Calculate total salary and count for each gender
-			if ($gender == "M") {
-				$total_male_salary += $salary;
-				$count_male++;
-				if ($salary > $max_male_salary) {
-					$max_male_salary = $salary;
+		// Define variables for average and highest salaries
+		$avg_m = 0;
+		$highest_m = 0;
+		$count_m = 0;
+		$avg_n = 0;
+		$highest_n = 0;
+		$count_n = 0;
+
+		// Loop through each row in the CSV file
+		while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
+			// Check if the employee type is "m" or "n"
+			if ($data[1] == "m") {
+				$count_m++;
+				$salary = intval($data[2]);
+				$avg_m += $salary;
+				if ($salary > $highest_m) {
+					$highest_m = $salary;
 				}
-			} else {
-				$total_female_salary += $salary;
-				$count_female++;
-				if ($salary > $max_female_salary) {
-					$max_female_salary = $salary;
+			} elseif ($data[1] == "n") {
+				$count_n++;
+				$salary = intval($data[2]);
+				$avg_n += $salary;
+				if ($salary > $highest_n) {
+					$highest_n = $salary;
 				}
 			}
 		}
 
-		// Calculate average salary for each gender
-		$avg_male_salary = $total_male_salary / $count_male;
-		$avg_female_salary = $total_female_salary / $count_female;
+		// Calculate the average salaries
+		if ($count_m > 0) {
+			$avg_m /= $count_m;
+		}
+		if ($count_n > 0) {
+			$avg_n /= $count_n;
+		}
 
-		// Close the CSV file
-		fclose($file);
+		// Close the file handle
+		fclose($handle);
+
+		// Print the results
+		echo "<h3>2. Palkade võrdlus</h3>";
+		echo "<p>Keskmine meeste palk: " . round($avg_m) . " EUR</p>";
+		echo "<p>Kõrgeim meeste palk: " . $highest_m . " EUR</p>";
+		echo "<p>Keskmine naiste palk: " . round($avg_n) . " EUR</p>";
+		echo "<p>Kõrgeim naiste palk: " . $highest_n . " EUR</p>";
 
         ?>
         
