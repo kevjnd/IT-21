@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="et">
   <head>
-    <meta synniaeget="utf-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Harjutus7</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
@@ -89,7 +89,7 @@
 
         //Ristküliku pindala
         echo "<h3>Ristküliku pindala</h3>";
-        if (isset($_GET['pikkus']) && isset($_GET['laius'])) {
+        if ($_SERVER["REQUEST_METHOD"] == "GET") {
           $pikkus = $_GET["pikkus"];
           $laius = $_GET["laius"];
       
@@ -100,7 +100,7 @@
 
         //Isikukood
         echo "<h3>Isikukood</h3>";
-        if (isset($_GET['isikukood'])) {
+        if ($_SERVER["REQUEST_METHOD"] == "GET") {
           $ikood = $_GET["isikukood"];
           if (strlen($ikood) == 11) {
               echo "Isikukood on õige pikkusega<br>";

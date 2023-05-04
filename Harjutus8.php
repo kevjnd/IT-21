@@ -2,7 +2,7 @@
 <html lang="et">
 
 <head>
-    <meta synniaeget="utf-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Harjutus8</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -54,7 +54,7 @@
                 } else {
                     $aastaajad = 'talv';
                 }
-                echo '<img width="250" heigth="250" src="https://hips.hearstapps.com/ghk.h-cdn.co/assets/18/12/spring-cherry-blossoms.jpg" alt="'.$aastaajad.' kevad">';
+                echo '<img src="https://hips.hearstapps.com/ghk.h-cdn.co/assets/18/12/spring-cherry-blossoms.jpg" alt="'.$aastaajad.' kevad">';
 
                 ?>
             </div>
