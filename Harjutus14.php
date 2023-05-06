@@ -18,32 +18,71 @@
         //Kevin Joarand
         //04.05.2023
 
-        $dir = "/Pildid"; // kausta nimi, kus pildid asuvad
-		$files = glob($dir . "*.jpg"); // otsime kõik JPG-formaadis pildid kaustast
-		$file = array_rand($files); // valime suvalise pildi
-        ?>
-        
-        <img src="<?php echo $files[$file]; ?>" alt="Suvaline pilt">
+        // Suvaline pilt
+        function suvapilt() {
+            echo "<h3>1. Suvaline pilt</h3>";
 
-        <?php
-        $dir = "/Pildid"; // kausta nimi, kus pildid asuvad
-        $cols = 3; // veergude arv
-
-        $files = glob($dir . "*.jpg"); // otsime kõik JPG-formaadis pildid kaustast
-
-        // loome tabeli, kus on veerud vastavalt $cols väärtusele
-        echo "<table>";
-        for ($i = 0; $i < count($files); $i++) {
-            if ($i % $cols == 0) {
-                echo "<tr>"; // uus rida
-            }
-            // loome pisipildi, mis linkib suuremale pildile
-            echo "<td><a href='" . $files[$i] . "'><img src='" . $files[$i] . "' width='100'></a></td>";
-            if ($i % $cols == $cols-1) {
-                echo "</tr>"; // rida täis
-            }
+            $pildid = array(
+            "https://picsum.photos/seed/1/500",
+            "https://picsum.photos/seed/2/500",
+            "https://picsum.photos/seed/3/500",
+            "https://picsum.photos/seed/4/500",
+            "https://picsum.photos/seed/5/500",
+            "https://picsum.photos/seed/6/500",
+            "https://picsum.photos/seed/7/500",
+            "https://picsum.photos/seed/8/500",
+            "https://picsum.photos/seed/9/500",
+            "https://picsum.photos/seed/10/500",
+            "https://picsum.photos/seed/11/500",
+            "https://picsum.photos/seed/12/500",
+            "https://picsum.photos/seed/13/500",
+            "https://picsum.photos/seed/14/500",
+            "https://picsum.photos/seed/15/500",
+            "https://picsum.photos/seed/16/500",
+            "https://picsum.photos/seed/17/500",
+            "https://picsum.photos/seed/19/500",
+            "https://picsum.photos/seed/20/500"
+            );
+            $suvapilt = $pildid[array_rand($pildid)];
+            echo "<img src='$suvapilt' alt='Suvaline pilt'>";
         }
-        echo "</table>";
+
+        suvapilt();
+
+       // Pisipildid veergudes
+        echo "<h3>2. Pisipildid veergudes</h3>";
+
+        // Muutujad pildi seadistamiseks
+        $pildi_lingi_alus = 'https://picsum.photos/seed/';
+        $pildi_suurus = '500';
+
+        // Piltide lingid massiivis
+        $pildi_lingid = array(
+            array('id' => '1', 'link' => $pildi_lingi_alus . '1/' . $pildi_suurus),
+            array('id' => '2', 'link' => $pildi_lingi_alus . '2/' . $pildi_suurus),
+            array('id' => '3', 'link' => $pildi_lingi_alus . '3/' . $pildi_suurus)
+        );
+
+        // Kuvame pisipildid veergudena
+        $veerud = 3; // veergude arv
+        echo '<div class="pildid">';
+        for ($i=0; $i<count($pildi_lingid); $i++) {
+            if ($i % $veerud == 0) { // kui rida täis, alusta uut rida
+                echo '</div><div class="pildid">';
+            }
+            echo '<div class="pilt">';
+            echo '<a href="' . $pildi_lingid[$i]['link'] . '"><img src="' . $pildi_lingid[$i]['link'] . '" alt="Pilt ' . ($i+1) . '" width="200" height="200"></a>';
+            echo '</div>';
+        }
+        echo '</div>';
+
+        // Kuvame suurema pildi, kui kasutaja klõpsab pisipildil
+        if (isset($_GET['pilt'])) {
+            $suur_pilt = $_GET['pilt'];
+            echo '<div class="suur-pilt-container">';
+            echo '<img src="' . $suur_pilt . '" alt="Suur pilt" class="suur-pilt">';
+            echo '</div>';
+        }
         ?>
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
