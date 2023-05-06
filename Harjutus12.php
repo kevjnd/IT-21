@@ -52,36 +52,63 @@
 
 
         //2. Palkade võrdlus
-        function palkadevordlus() {
-			$meestePalgad = array();
-			$naistePalgad = array();
-			if (($handle = fopen("tootajad.csv", "r")) !== FALSE) {
-			  while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-				$nimi = $data[0];
-				$sugu = $data[1];
-				$palk = (int)$data[2];
-				if ($sugu == 'm') {
-				  array_push($meestePalgad, $palk);
-				} elseif ($sugu == 'n') {
-				  array_push($naistePalgad, $palk);
+        $data = array(
+			array('Hubert Hunt', 'm', 2340),
+			array('Siim Siil', 'm', 2570),
+			array('Märt Mäger', 'm', 1960),
+			array('Vilma Vihmauss', 'n', 2060),
+			array('Merike Metskits', 'n', 2250),
+			array('Kati Karu', 'n', 2370),
+			array('Elmar Elevant', 'm', 2900),
+			array('Timoteus Tigu', 'm', 2850),
+			array('Reet Rebane', 'n', 2340),
+			array('Kalev Kaamel', 'm', 2570),
+			array('Karmen Kass', 'n', 2120),
+			array('Kornelius Koer', 'm', 2250)
+		);
+		
+		$meeste_summa = 0;
+		$naiste_summa = 0;
+		$meeste_arv = 0;
+		$naiste_arv = 0;
+		
+		foreach ($data as $row) {
+			if (isset($row[1]) && isset($row[2])) {
+				if ($row[1] == "m") {
+					$meeste_summa += $row[2];
+					$meeste_arv++;
+				} elseif ($row[1] == "n") {
+					$naiste_summa += $row[2];
+					$naiste_arv++;
 				}
-			  }
-			  fclose($handle);
+			} else {
+				$row[1] = "";
+				$row[2] = 0;
 			}
-		  
-			$meesteKeskmine = array_sum($meestePalgad) / count($meestePalgad);
-			$naisteKeskmine = array_sum($naistePalgad) / count($naistePalgad);
-			$korgeimMehepalk = max($meestePalgad);
-			$korgeimNaisepalk = max($naistePalgad);
-		  
-			echo "<table>";
-			echo "<tr><th></th><th>Keskmine palk</th><th>Kõrgeim palk</th></tr>";
-			echo "<tr><td>Meeste palk</td><td>" . $meesteKeskmine . "</td><td>" . $korgeimMehepalk . "</td></tr>";
-			echo "<tr><td>Naiste palk</td><td>" . $naisteKeskmine . "</td><td>" . $korgeimNaisepalk . "</td></tr>";
-			echo "</table>";
-		  }
-
-		  palkadevordlus();
+		}
+		
+		if ($meeste_arv > 0 && $naiste_arv > 0) {
+			$meeste_keskmine_palk = round($meeste_summa / $meeste_arv);
+			$naiste_keskmine_palk = round($naiste_summa / $naiste_arv);
+		
+			$meeste_maksimum_palk = 0;
+			$naiste_maksimum_palk = 0;
+		
+			foreach ($data as $row) {
+				if ($row[1] == "m" && $row[2] > $meeste_maksimum_palk) {
+					$meeste_maksimum_palk = $row[2];
+				} elseif ($row[1] == "n" && $row[2] > $naiste_maksimum_palk) {
+					$naiste_maksimum_palk = $row[2];
+				}
+			}
+		
+			echo "Meeste keskmine palk: " . $meeste_keskmine_palk . "<br>";
+			echo "Naiste keskmine palk: " . $naiste_keskmine_palk . "<br>";
+			echo "Kõrgeim meeste palk: " . $meeste_maksimum_palk . "<br>";
+			echo "Kõrgeim naiste palk: " . $naiste_maksimum_palk . "<br>";
+		} else {
+			echo "Andmefailis ei ole piisavalt ridu meeste ja naiste palga võrdlemiseks.";
+		}
 		?>
         
         </div>
