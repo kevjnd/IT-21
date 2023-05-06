@@ -11,16 +11,6 @@
 <body>
     <div class="container mt-5">
         <h1>Harjutus12</h1>
-        
-		<h3>1. Sõiduaeg</h3>
-        <form method="GET" action="#">
-            <label for="start-time">Start Time (hh:mm):</label>
-            <input type="text" id="start-time" name="start-time" minlength="5" required><br><br>
-            <label for="end-time">End Time (hh:mm):</label>
-            <input type="text" id="end-time" name="end-time" minlength="5" required><br><br>
-            <button type="submit">Calculate</button>
-        </form>
-  
         <?php
 
         //Harjutus 12
@@ -28,83 +18,71 @@
         //16.04.2023
 
         //1. Sõiduaeg
-        if(isset($_GET["start-time"]) && isset($_GET["end-time"])) {
-			$start_time = $_GET["start-time"];
-			$end_time = $_GET["end-time"];
-			
-			if(strlen($start_time) >= 5 && strlen($end_time) >= 5) {
-				$start_timestamp = strtotime($start_time);
-				$end_timestamp = strtotime($end_time);
-				
-				if($end_timestamp > $start_timestamp) {
-					$driving_time_seconds = $end_timestamp - $start_timestamp;
-					$driving_time_hours = floor($driving_time_seconds / 3600);
-					$driving_time_minutes = floor(($driving_time_seconds % 3600) / 60);
-					
-					echo "<p>Driving Time: " . $driving_time_hours . " hours " . $driving_time_minutes . " minutes</p>";
+        function soiduaeg() {
+			echo '<h2>Sõiduaeg</h2>';
+			echo '
+				<form method="get">
+					<label>Stardi aeg: </label>
+					<input type="text" name="start_time" placeholder="hh:mm"><br><br>
+					<label>Lõpp aeg: </label>
+					<input type="text" name="end_time" placeholder="hh:mm"><br><br>
+					<input type="submit" class="btn btn-primary" name="submit_time" value="Arvuta sõiduaeg">
+				</form>';
+			if(isset($_GET['submit_time'])) {
+				$start_time = $_GET['start_time'];
+				$end_time = $_GET['end_time'];
+		
+				if(empty($start_time) || empty($end_time)) {
+					echo "<p>Väljad ei saa olla tühjad!</p>";
+				} elseif(strlen($start_time) < 5 || strlen($end_time) < 5) {
+					echo "<p>Ajad peavad olema vähemalt 5 sümbolit pikad!</p>";
 				} else {
-					echo "<p>End time must be after start time.</p>";
+					$start_timestamp = strtotime($start_time);
+					$end_timestamp = strtotime($end_time);
+					$diff = $end_timestamp - $start_timestamp;
+		
+					$hours = floor($diff / 3600);
+					$minutes = floor(($diff / 60) % 60);
+		
+					echo "<p>Sõiduaeg: $hours tundi ja $minutes minutit</p>";
 				}
-			} else {
-				echo "<p>Please enter valid start and end times in hh:mm format.</p>";
 			}
 		}
+		soiduaeg();
+
 
         //2. Palkade võrdlus
-        // Path to the CSV file
-		$file = 'C:/Users/kevin/Downloads/tootajad.csv';
-
-		// Open the file and read its contents
-		$handle = fopen($file, "r");
-		$data = fgetcsv($handle, 1000, ";");
-
-		// Define variables for average and highest salaries
-		$avg_m = 0;
-		$highest_m = 0;
-		$count_m = 0;
-		$avg_n = 0;
-		$highest_n = 0;
-		$count_n = 0;
-
-		// Loop through each row in the CSV file
-		while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
-			// Check if the employee type is "m" or "n"
-			if ($data[1] == "m") {
-				$count_m++;
-				$salary = intval($data[2]);
-				$avg_m += $salary;
-				if ($salary > $highest_m) {
-					$highest_m = $salary;
+        function palkadevordlus() {
+			$meestePalgad = array();
+			$naistePalgad = array();
+			if (($handle = fopen("tootajad.csv", "r")) !== FALSE) {
+			  while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+				$nimi = $data[0];
+				$sugu = $data[1];
+				$palk = (int)$data[2];
+				if ($sugu == 'm') {
+				  array_push($meestePalgad, $palk);
+				} elseif ($sugu == 'n') {
+				  array_push($naistePalgad, $palk);
 				}
-			} elseif ($data[1] == "n") {
-				$count_n++;
-				$salary = intval($data[2]);
-				$avg_n += $salary;
-				if ($salary > $highest_n) {
-					$highest_n = $salary;
-				}
+			  }
+			  fclose($handle);
 			}
-		}
+		  
+			$meesteKeskmine = array_sum($meestePalgad) / count($meestePalgad);
+			$naisteKeskmine = array_sum($naistePalgad) / count($naistePalgad);
+			$korgeimMehepalk = max($meestePalgad);
+			$korgeimNaisepalk = max($naistePalgad);
+		  
+			echo "<table>";
+			echo "<tr><th></th><th>Keskmine palk</th><th>Kõrgeim palk</th></tr>";
+			echo "<tr><td>Meeste palk</td><td>" . $meesteKeskmine . "</td><td>" . $korgeimMehepalk . "</td></tr>";
+			echo "<tr><td>Naiste palk</td><td>" . $naisteKeskmine . "</td><td>" . $korgeimNaisepalk . "</td></tr>";
+			echo "</table>";
+		  }
 
-		// Calculate the average salaries
-		if ($count_m > 0) {
-			$avg_m /= $count_m;
-		}
-		if ($count_n > 0) {
-			$avg_n /= $count_n;
-		}
-
-		// Close the file handle
-		fclose($handle);
-
-		// Print the results
-		echo "<h3>2. Palkade võrdlus</h3>";
-		echo "<p>Keskmine meeste palk: " . round($avg_m) . " EUR</p>";
-		echo "<p>Kõrgeim meeste palk: " . $highest_m . " EUR</p>";
-		echo "<p>Keskmine naiste palk: " . round($avg_n) . " EUR</p>";
-		echo "<p>Kõrgeim naiste palk: " . $highest_n . " EUR</p>";
-
-        ?>
+		  palkadevordlus();
+		?>
         
         </div>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
