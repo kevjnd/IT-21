@@ -18,38 +18,33 @@
         //Kevin Joarand
         //04.05.2023
 
-        // Directory containing images
-        $dir = "C:/Users/user/Downloads/";
-
-        // Get all image files in the directory
-        $images = glob($dir . "*.jpg");
-
-        // Select a random image from the directory
-        $random_image = $images[array_rand($images)];
-
-        // Display the random image
-        echo "<img src='$random_image' alt='random image'>";
-
-        // Display thumbnails in columns
-        $num_columns = 3; // Change this value to adjust number of columns
-
-        // Create array of image filenames
-        $image_filenames = array_map('basename', $images);
-
-        // Divide the image filenames into arrays for each column
-        $column_images = array_chunk($image_filenames, ceil(count($image_filenames) / $num_columns));
-
-        // Display each column of thumbnails
-        foreach ($column_images as $column) {
-            echo "<div style='float: left; width: " . (100 / $num_columns) . "%;'>";
-            foreach ($column as $image) {
-                echo "<a href='$dir$image' target='_blank'><img src='$dir$image' alt='thumbnail' style='width: 100%;'></a>";
-            }
-            echo "</div>";
-        }
-
+        $dir = "/Pildid"; // kausta nimi, kus pildid asuvad
+		$files = glob($dir . "*.jpg"); // otsime kõik JPG-formaadis pildid kaustast
+		$file = array_rand($files); // valime suvalise pildi
         ?>
         
+        <img src="<?php echo $files[$file]; ?>" alt="Suvaline pilt">
+
+        <?php
+        $dir = "/Pildid"; // kausta nimi, kus pildid asuvad
+        $cols = 3; // veergude arv
+
+        $files = glob($dir . "*.jpg"); // otsime kõik JPG-formaadis pildid kaustast
+
+        // loome tabeli, kus on veerud vastavalt $cols väärtusele
+        echo "<table>";
+        for ($i = 0; $i < count($files); $i++) {
+            if ($i % $cols == 0) {
+                echo "<tr>"; // uus rida
+            }
+            // loome pisipildi, mis linkib suuremale pildile
+            echo "<td><a href='" . $files[$i] . "'><img src='" . $files[$i] . "' width='100'></a></td>";
+            if ($i % $cols == $cols-1) {
+                echo "</tr>"; // rida täis
+            }
+        }
+        echo "</table>";
+        ?>
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
