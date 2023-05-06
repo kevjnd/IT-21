@@ -11,46 +11,6 @@
     <h1>Harjutus7</h1>
 
     <div class="container mt-5">
-        <div class="row">
-            <form>
-            <div class="form-group">
-                <label for="email"><h3>Liitu uudiskirjaga</h3></label>
-                <input type="email" class="form-control" placeholder="juku@gmail.com" id="email" aria-describedby="emailHelp">
-                <small id="emailHelp" class="form-text text-muted">Sisesta email</small>
-            </div>
-            <button type="submit" class="btn btn-primary">Sisesta</button>
-            </form>
-        </div>
-
-        <form method="get">
-        <div class="form-group">
-            <label for="kasutajanimi"><h3>Sisesta kasutajanimi</h3></label>
-            <input type="text" class="form-control" placeholder="Kasutajanimi" id="kasutajanimi" name="kasutajanimi">
-        </div>
-        <button type="submit" class="btn btn-primary">Sisesta</button>
-        </form>
-
-        <form action="#" method="get">
-          Vali vahemiku algus: <input type="text" name="algus" />
-          Vali vahemiku lõpp: <input type="text" name="lopp" />
-          <input type="submit" name="submit" class="btn btn-primary" value="Kuva vahemik" />
-        </form>
-
-        <form method="get">
-        <label for="pikkus">Pikkus:</label>
-        <input type="number" name="pikkus" id="pikkus" required><br><br>
-
-        <label for="laius">Laius:</label>
-        <input type="number" name="laius" id="laius" required><br><br>
-
-        <input type="submit" value="Arvuta" class="btn btn-primary">
-        </form>
-
-        <form method="get">
-            <label for="ikood">Sisesta isikukood</label>
-            <input type="number" name="isikukood" id="isikukood">
-            <button type="submit" class="btn btn-primary">Sisesta</button>
-        </form>
 
     <?php
         //Harjutus 7
@@ -58,49 +18,110 @@
         //31.01.2023
 
         //Tervitus
-        echo "<h3>Tervitus</h3>";
+        echo "<h3>1. Tervitus</h3>";
         function greet($tervitus) {
             return "Tere " . $tervitus ;
           }
           
           echo greet("päiksekesekene!");
 
-        //Kasutajanimi ja email
-        echo "<h3>Kasutajanimi ja email</h3>";
-        if(isset($_GET['kasutajanimi'])) {
-            $kasutajanimi = strtolower($_GET['kasutajanimi']);
-            $email = $kasutajanimi . "@hkhk.edu.ee";
-            $kood = substr(str_shuffle(str_repeat("0123456789abcdefghijklmnopqrstuvwxyz", 7)), 0, 7);
-            echo "<br>";
-            echo "kasutajanimi: " . $kasutajanimi . "<br>";
-            echo "Email: " . $email . "<br>";
-            echo "Code: " . $kood . "<br>";
-          }
-
-        //Arvud
-        echo "<h3>Arvud</h3>";
-        if (isset($_GET['submit'])) {
-          $algus = $_GET['algus'];
-          $lopp = $_GET['lopp'];
-          for ($i = $algus; $i <= $lopp; $i++) {
-            echo  $i . ' ';
-          }
+          function uudiskiri() {
+            echo '
+                <div class="row">
+                    <form>
+                        <div class="form-group">
+                            <label for="email"><h3>2. Liitu uudiskirjaga</h3></label>
+                            <input type="email" class="form-control" placeholder="juku@gmail.com" id="email" aria-describedby="emailHelp">
+                            <small id="emailHelp" class="form-text text-muted">Sisesta email</small>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Sisesta</button>
+                    </form>
+                </div>';
         }
 
-        //Ristküliku pindala
-        echo "<h3>Ristküliku pindala</h3>";
-        if ($_SERVER["REQUEST_METHOD"] == "GET") {
-          $pikkus = $_GET["pikkus"];
-          $laius = $_GET["laius"];
-      
-          $pindala = $pikkus * $laius;
-      
-          echo "<br>Ristküliku pindala on: " . $pindala;
-        }
+        uudiskiri();
 
-        //Isikukood
-        echo "<h3>Isikukood</h3>";
-        if ($_SERVER["REQUEST_METHOD"] == "GET") {
+          function kasutajanimijaemail() {
+            echo '
+                <form method="get">
+                    <div class="form-group">
+                        <label for="kasutajanimi"><h3>3. Sisesta kasutajanimi</h3></label>
+                        <input type="text" class="form-control" placeholder="Kasutajanimi" id="kasutajanimi" name="kasutajanimi">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sisesta</button>
+                </form>';
+                
+            if(isset($_GET['kasutajanimi'])) {
+                $kasutajanimi = strtolower($_GET['kasutajanimi']);
+                $email = $kasutajanimi . "@hkhk.edu.ee";
+                $kood = substr(str_shuffle(str_repeat("0123456789abcdefghijklmnopqrstuvwxyz", 7)), 0, 7);
+                echo "<br>";
+                echo "kasutajanimi: " . $kasutajanimi . "<br>";
+                echo "Email: " . $email . "<br>";
+                echo "Code: " . $kood . "<br>";
+            }
+        }
+        
+        // Call the function to generate the form
+        kasutajanimijaemail();
+
+        function arvud() {
+      
+          echo "<h3>4. Arvud</h3>";
+          if (isset($_GET['submit'])) {
+              $algus = $_GET['algus'];
+              $lopp = $_GET['lopp'];
+              for ($i = $algus; $i <= $lopp; $i++) {
+                  echo  $i . ' ';
+              }
+          }
+
+          echo '
+              <form action="#" method="get">
+                  Vali vahemiku algus: <input type="text" name="algus" />
+                  Vali vahemiku lõpp: <input type="text" name="lopp" />
+                  <input type="submit" name="submit" class="btn btn-primary" value="Kuva vahemik" />
+              </form>';
+      }
+
+      arvud();
+
+      function ristkulikupindala() {
+        echo "<h3>5. Ristküliku pindala</h3>";
+    
+        $pikkus = isset($_GET["pikkus"]) ? $_GET["pikkus"] : '';
+        $laius = isset($_GET["laius"]) ? $_GET["laius"] : '';
+    
+        echo '
+        <form method="get">
+            <label for="pikkus">Pikkus:</label>
+            <input type="number" name="pikkus" id="pikkus" value="' . $pikkus . '" required><br><br>
+    
+            <label for="laius">Laius:</label>
+            <input type="number" name="laius" id="laius" value="' . $laius . '" required><br><br>
+    
+            <input type="submit" value="Arvuta" class="btn btn-primary">
+        </form>';
+    
+        if (!empty($pikkus) && !empty($laius)) {
+            $pindala = $pikkus * $laius;
+            echo "<br>Ristküliku pindala on: " . $pindala;
+          }
+      }
+    
+    ristkulikupindala();
+
+    function isikukood() {
+      echo "<h3>6. Isikukood</h3>";
+  
+      echo '
+      <form method="get">
+          <label for="isikukood">Sisesta isikukood</label>
+          <input type="number" name="isikukood" id="isikukood">
+          <button type="submit" class="btn btn-primary">Sisesta</button>
+      </form>';
+  
+      if (isset($_GET["isikukood"])) {
           $ikood = $_GET["isikukood"];
           if (strlen($ikood) == 11) {
               echo "Isikukood on õige pikkusega<br>";
@@ -108,17 +129,20 @@
               echo "Isikukood on vale pikkusega<br>";
           }
           if (substr($ikood, 0, 1) == 1 || substr($ikood, 0, 1) == 3 || substr($ikood, 0, 1) == 5) {
-            echo "Mees<br>";
+              echo "Mees<br>";
           } else {
-            echo "Naine<br>";
+              echo "Naine<br>";
           }
           $ikood_subset = substr($ikood, 1, 6);
           $ikood_subset_formatted = implode(".", str_split($ikood_subset, 2));
           echo $ikood_subset_formatted;
-
         }
+    }
+  
+  isikukood();
+
         //Head mõtted
-        echo "<h3>Head mõtted</h3>";
+        echo "<h3>7. Head mõtted</h3>";
         $alus = array("Goblin", "Koer", "Minni");
         $öeldis = array("ütles", "karjus", "haukus");
         $sihitis = array("Mwahhh", "Kus mu sokid on?", "UwU");

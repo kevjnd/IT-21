@@ -13,6 +13,11 @@
         <h1>Harjutus10</h1>
 
         <?php
+
+        //Harjutus 10
+        //Kevin Joarand
+        //04.05.2023
+
         $correct_username = 'kasutaja';
         $correct_password = 'parool';
 
@@ -32,10 +37,10 @@
         } else {
             echo '<form method="post">
                     <label for="username">Kasutajanimi:</label>
-                    <input type="text" id="username" name="username" required>
+                    <input type="text" id="username" name="username" placeholder="kasutaja" required>
                     <br>
                     <label for="password">Parool:</label>
-                    <input type="password" id="password" name="password" required>
+                    <input type="password" id="password" name="password" placeholder="parool" required>
                     <br>
                     <input type="submit" value="Logi sisse">
                 </form>';
