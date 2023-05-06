@@ -25,8 +25,10 @@
 
                 //Leia kui vana on või kui vanaks saab kasutaja sellel aastal
                 echo "<h3>2. Leia kui vana on või kui vanaks saab kasutaja sellel aastal</h3>";
-                $vanus = date_diff(date_create($date), date_create($date))->y;
-                echo "Vanus: " . $vanus;
+                $birth_year = 2004; // kasutaja sünniaasta
+                $current_year = date("Y"); // praegune aasta
+                $age = $current_year - $birth_year;
+                echo "Kasutaja on/saab: " . $age . "\n";
 
                 //Mitu päeva on käesoleva kooliaasta lõpuni?
                 echo "<h3>3. Mitu päeva on käesoleva kooliaasta lõpuni?</h3>";
@@ -43,20 +45,19 @@
 
                 //Väljasta vastavalt aastaajale pilt
                 echo "<h3>4. Väljasta vastavalt aastaajale pilt</h3>";
-                $aastaaeg = date('n');
 
-                if ($aastaaeg >= 3 && $aastaaeg <= 5) {
-                    $aastaajad = 'kevad';
-                } elseif ($aastaaeg >= 6 && $aastaaeg <= 8) {
-                    $aastaajad = 'suvi';
-                } elseif ($aastaaeg >= 9 && $aastaaeg <= 11) {
-                    $aastaajad = 'sugis';
+                $current_month = date("n"); // praegune kuu
+                if ($current_month >= 3 && $current_month <= 5) {
+                echo "<img src='https://hips.hearstapps.com/ghk.h-cdn.co/assets/18/12/spring-cherry-blossoms.jpg'>";
+                } else if ($current_month >= 6 && $current_month <= 8) {
+                echo "<img src='https://community.thriveglobal.com/wp-content/uploads/2020/06/summer.jpg'>";
+                } else if ($current_month >= 9 && $current_month <= 11) {
+                echo "<img src='https://cdn.britannica.com/88/137188-050-8C779D64/Boston-Public-Garden.jpg'>";
                 } else {
-                    $aastaajad = 'talv';
+                echo "<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Winter_forest_silver.jpg'>";
                 }
-                echo '<img src="https://hips.hearstapps.com/ghk.h-cdn.co/assets/18/12/spring-cherry-blossoms.jpg" alt="'.$aastaajad.' kevad">';
-
                 ?>
+                <img src="<?php echo $image; ?>" alt="Current Season">
             </div>
             <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
                 integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
