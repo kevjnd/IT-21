@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MySQL Reader</title>
+    <title>Avaleht</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
@@ -14,10 +14,12 @@
         body {
             padding-top: 60px;
         }
-a {
+
+        a {
             color: inherit;
             text-decoration: none;
         }
+
         .page-nav {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -45,9 +47,9 @@ a {
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">Your Logo</a>
+            <a class="navbar-brand" href="#">Krõbin</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -55,7 +57,7 @@ a {
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link btn btn-outline-light" href="login.php">Login</a>
+                        <a class="nav-link btn btn-success" href="login.php">Login</a>
                     </li>
                 </ul>
             </div>
@@ -63,7 +65,8 @@ a {
     </nav>
 
     <div class="container mt-5">
-        <h2>MySQL Data</h2>
+        <h2>Valige asutus mida hinnata</h2>
+
         <?php
         // MySQL database configuration
         $host = 'localhost';
@@ -97,17 +100,49 @@ a {
         $sortColumn = isset($_GET['sort']) ? $_GET['sort'] : 'id';
         $sortOrder = isset($_GET['order']) && strtolower($_GET['order']) === 'desc' ? 'DESC' : 'ASC';
 
+        // Get the search query from the query parameter
+        $searchQuery = isset($_GET['search']) ? $_GET['search'] : '';
+
+        // Build the search condition dynamically based on the columns in the table
+        $searchCondition = '';
+        $columnsQuery = "SHOW COLUMNS FROM tabel1";
+        $columnsResult = $conn->query($columnsQuery);
+        if ($columnsResult->num_rows > 0) {
+            while ($columnRow = $columnsResult->fetch_assoc()) {
+                $columnName = $columnRow['Field'];
+                if ($columnName === 'id') {
+                    continue;
+                }
+                if (!empty($searchCondition)) {
+                    $searchCondition .= " OR ";
+                }
+                $searchCondition .= "`$columnName` LIKE '%$searchQuery%'";
+            }
+        }
+
         // Calculate the starting and ending positions for the current page
         $start = ($currentPage - 1) * $entriesPerPage;
         $end = $start + $entriesPerPage - 1;
         $end = min($end, $totalEntries);
 
-        // Retrieve data from the table with sorting
-        $dataQuery = "SELECT * FROM tabel1 ORDER BY $sortColumn $sortOrder LIMIT $start, $entriesPerPage";
+        // Retrieve data from the table with sorting and search condition
+        $dataQuery = "SELECT * FROM tabel1";
+        if (!empty($searchCondition)) {
+            $dataQuery .= " WHERE $searchCondition";
+        }
+        $dataQuery .= " ORDER BY $sortColumn $sortOrder LIMIT $start, $entriesPerPage";
         $dataResult = $conn->query($dataQuery);
 
         // Check if there is any data in the table
         if ($dataResult->num_rows > 0) {
+            // Display search bar
+            echo '<form class="mb-3" method="GET">';
+            echo '<div class="input-group">';
+            echo '<input type="text" class="form-control" name="search" placeholder="Search" value="' . htmlspecialchars($searchQuery) . '">';
+            echo '<button type="submit" class="btn btn-warning">Search</button>';
+            echo '</div>';
+            echo '</form>';
+
             // Display table
             echo '<table class="table">';
             echo '<thead>';
@@ -148,16 +183,16 @@ a {
             // Pagination links
             echo '<ul class="page-nav">';
             if ($currentPage > 1) {
-                echo '<li><a href="?page=1&sort=' . $sortColumn . '&order=' . $sortOrder . '"><i class="fas fa-angle-double-left"></i></a></li>';
-                echo '<li><a href="?page=' . ($currentPage - 1) . '&sort=' . $sortColumn . '&order=' . $sortOrder . '"><i class="fas fa-angle-left"></i></a></li>';
+                echo '<li><a href="?page=1&sort=' . $sortColumn . '&order=' . $sortOrder . '&search=' . urlencode($searchQuery) . '"><i class="fas fa-angle-double-left"></i></a></li>';
+                echo '<li><a href="?page=' . ($currentPage - 1) . '&sort=' . $sortColumn . '&order=' . $sortOrder . '&search=' . urlencode($searchQuery) . '"><i class="fas fa-angle-left"></i></a></li>';
             } else {
                 echo '<li><span><i class="fas fa-angle-double-left"></i></span></li>';
                 echo '<li><span><i class="fas fa-angle-left"></i></span></li>';
             }
             echo '<li><span>Page ' . $currentPage . '</span></li>';
             if ($currentPage < $totalPages) {
-                echo '<li><a href="?page=' . ($currentPage + 1) . '&sort=' . $sortColumn . '&order=' . $sortOrder . '"><i class="fas fa-angle-right"></i></a></li>';
-                echo '<li><a href="?page=' . $totalPages . '&sort=' . $sortColumn . '&order=' . $sortOrder . '"><i class="fas fa-angle-double-right"></i></a></li>';
+                echo '<li><a href="?page=' . ($currentPage + 1) . '&sort=' . $sortColumn . '&order=' . $sortOrder . '&search=' . urlencode($searchQuery) . '"><i class="fas fa-angle-right"></i></a></li>';
+                echo '<li><a href="?page=' . $totalPages . '&sort=' . $sortColumn . '&order=' . $sortOrder . '&search=' . urlencode($searchQuery) . '"><i class="fas fa-angle-double-right"></i></a></li>';
             } else {
                 echo '<li><span><i class="fas fa-angle-right"></i></span></li>';
                 echo '<li><span><i class="fas fa-angle-double-right"></i></span></li>';
@@ -169,7 +204,8 @@ a {
 
         // Close the database connection
         $conn->close();
-        ?>    </div>
+        ?>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
