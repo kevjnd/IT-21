@@ -57,7 +57,7 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link btn btn-success" href="login.php">Login</a>
+                        <a class="nav-link btn btn-warning" style="color: black" href="login.php">Logi sisse</a>
                     </li>
                 </ul>
             </div>
@@ -139,7 +139,7 @@
             echo '<form class="mb-3" method="GET">';
             echo '<div class="input-group">';
             echo '<input type="text" class="form-control" name="search" placeholder="Search" value="' . htmlspecialchars($searchQuery) . '">';
-            echo '<button type="submit" class="btn btn-warning">Search</button>';
+            echo '<button type="submit" class="btn btn-success">Otsing</button>';
             echo '</div>';
             echo '</form>';
 
