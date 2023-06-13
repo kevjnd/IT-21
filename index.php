@@ -11,6 +11,40 @@
     <style>
         /* Add your custom styles here */
 
+        .rating {
+        unicode-bidi: bidi-override;
+        direction: rtl;
+        }
+
+        .rating > input {
+            display: none;
+        }
+
+        .rating > label:before {
+            content: '\2605';
+            margin: 5px;
+            font-size: 25px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .rating > label {
+            color: grey;
+        }
+
+        .rating > input:checked ~ label,
+        .rating:not(:checked) > label:hover,
+        .rating:not(:checked) > label:hover ~ label {
+            color: gold;
+        }
+
+        .rating > input:checked + label:hover,
+        .rating > input:checked ~ label:hover,
+        .rating > label:hover ~ input:checked ~ label,
+        .rating > input:checked ~ label:hover ~ label {
+            color: #ffd700;
+        }
+
         body {
             padding-top: 60px;
         }
@@ -175,6 +209,8 @@
                     }
                     echo '<td>' . $value . '</td>';
                 }
+                // Add a button to show the pop-up form
+                echo '<td><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Hinda</button></td>';
                 echo '</tr>';
             }
             echo '</tbody>';
@@ -205,10 +241,94 @@
         // Close the database connection
         $conn->close();
         ?>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Hindamine</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="Hindaja_nimi" class="form-label">Hindaja nimi:</label>
+                            <input type="text" class="form-control" id="Hindaja_nimi" name="Hindaja_nimi">
+                        </div>
+                        <div class="mb-3">
+                            <label for="Kommentaar" class="form-label">Kommentaar:</label>
+                            <textarea class="form-control" id="Kommentaar" name="Kommentaar"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Hinnang:</label>
+                            <div class="rating">
+                                <input type="radio" name="Hinnang" id="star10" value="5">
+                                <label for="star10"></label>
+                                <input type="radio" name="Hinnang" id="star9" value="5">
+                                <label for="star9"></label>
+                                <input type="radio" name="Hinnang" id="star8" value="5">
+                                <label for="star8"></label>
+                                <input type="radio" name="Hinnang" id="star7" value="5">
+                                <label for="star7"></label>
+                                <input type="radio" name="Hinnang" id="star6" value="5">
+                                <label for="star6"></label>
+                                <input type="radio" name="Hinnang" id="star5" value="5">
+                                <label for="star5"></label>
+                                <input type="radio" name="Hinnang" id="star4" value="4">
+                                <label for="star4"></label>
+                                <input type="radio" name="Hinnang" id="star3" value="3">
+                                <label for="star3"></label>
+                                <input type="radio" name="Hinnang" id="star2" value="2">
+                                <label for="star2"></label>
+                                <input type="radio" name="Hinnang" id="star1" value="1">
+                                <label for="star1"></label>
+                            </div>
+                        </div>
+                    </form>
+                
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">< Tagasi</button>
+                    <button type="button" class="btn btn-success">Saada!</button>
+                </div>
+                <div id="tabel2Data"></div>
+            </div>
+        </div>
     </div>
 
+    <script>
+        const ratingStars = document.querySelectorAll('.rating input');
+        ratingStars.forEach(star => {
+            star.addEventListener('change', () => {
+                const selectedRating = star.value;
+                console.log('Selected Rating:', selectedRating);
+            });
+        });
+    </script>
+    <script>
+        // Fetch the data from "tabel2" table
+        fetch('get_tabel2_data.php')
+            .then(response => response.json())
+            .then(data => {
+                const tabel2DataDiv = document.getElementById('tabel2Data');
+                let html = '<h4>Teiste hinnangud</h4>';
+                html += '<table class="table">';
+                html += '<thead><tr><th>Nimi</th><th>Kommentaar</th><th>Hinnang</th></tr></thead>';
+                html += '<tbody>';
+                data.forEach(row => {
+                    html += '<tr>';
+                    html += '<td>' + row.hindaja_nimi + '</td>';
+                    html += '<td>' + row.kommentaar + '</td>';
+                    html += '<td>' + row.hinnang + '</td>';
+                    html += '</tr>';
+                });
+                html += '</tbody>';
+                html += '</table>';
+                tabel2DataDiv.innerHTML = html;
+            })
+            .catch(error => console.error('Error:', error));
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
 </body>
 
 </html>
