@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ülesanne 14</title>
+</head>
+<body>
+    <div class="container">
+        <ul class="list-group">
+            <li class="list-group-item">Ootel: Lorem ipsum dolor sit amet</li>
+            <li class="list-group-item">Tehtud: Lorem ipsum dolor sit amet</li>
+            <li class="list-group-item">Viga: Lorem ipsum dolor sit amet</li>
+            <li class="list-group-item">Tehtud: Lorem ipsum dolor sit amet</li>
+            <li class="list-group-item">Tehtud: Lorem ipsum dolor sit amet</li>
+            <li class="list-group-item">Lorem ipsum dolor sit amet</li>
+            <li class="list-group-item">Viga: Lorem ipsum dolor sit amet</li>
+          </ul>
+    </div>
+
+    <script>
+        // Krõbin
+        // 31.10.2023
+        // Ülesanne 14
+        
+            // Leia kõik list-group-item elemendid
+            const listItems = document.querySelectorAll(".list-group-item");
+          
+            // Mine läbi iga list-group-item element
+            listItems.forEach((item) => {
+              const text = item.textContent.toLowerCase(); // Muuda tekst väiketähtedeks
+          
+              if (text.includes("ootel")) {
+                item.classList.add("list-group-item-warning"); // Lisa klass "list-group-item-warning"
+              } else if (text.includes("tehtud")) {
+                item.classList.add("list-group-item-success"); // Lisa klass "list-group-item-success"
+                item.style.fontWeight = "700"; // Lisa font-weight: 700
+              } else if (text.includes("viga")) {
+                item.classList.add("list-group-item-danger"); // Lisa klass "list-group-item-danger"
+              }
+            });
+          </script>
+</body>
+</html>  

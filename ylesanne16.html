@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ülesanne 16 - Mobiiltelefonide nimekiri</title>
+    <style>
+        .peida {display: none;}
+    </style>
+</head>
+<body>
+<h1>Mobiiltelefonide nimekiri</h1>
+<ul id="mob">
+    <li>555<span class="peida">12345</span></li>
+    <li>567<span class="peida">89012</span></li>
+    <li>512<span class="peida">34567</span></li>
+    <li>534<span class="peida">56789</span></li>
+    <li>578<span class="peida">90123</span></li>
+    <li>543<span class="peida">21678</span></li>
+    <li>523<span class="peida">48765</span></li>
+    <li>556<span class="peida">67788</span></li>
+</ul>
+
+<script>
+// Krõbin
+// 31.10.2023
+// Ülesanne 15
+
+    // Leia ul element
+const ulElement = document.getElementById("mob");
+
+// Lisa kliki sündmus ul elementile
+ulElement.addEventListener("click", function (event) {
+  // Kontrolli, kas klikitud element on li element
+  if (event.target.tagName === "LI") {
+    // Leia .peida klassiga element ja muuda selle nähtavust
+    const peidaElement = event.target.querySelector(".peida");
+    if (peidaElement) {
+      peidaElement.style.display = "inline"; // Muuda nähtavuse inline'iks
+    }
+  }
+});
+</script>
+</body>
+</html>
