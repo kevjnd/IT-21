@@ -1,6 +1,6 @@
 ---
-- name: Install Nginx and MySQL
-  hosts: hostmachine
+- name: Install Nginx and PostgreSQL
+  hosts: virtualmachines
 
   tasks:
     - name: Install Nginx
@@ -8,6 +8,7 @@
       apt:
         name: nginx
         state: present
+      when: ansible_distribution == 'Ubuntu'
 
     - name: Start Nginx service
       become: true
@@ -15,16 +16,41 @@
         name: nginx
         state: started
         enabled: yes
+      when: ansible_distribution == 'Ubuntu'
 
-    - name: Install MySQL
+    - name: Install PostgreSQL and related packages (Ubuntu)
       become: true
       apt:
-        name: mysql-server
+        name: "{{ item }}"
         state: present
+      loop:
+        - postgresql
+        - postgresql-contrib
+        - libpq-dev
+      when: ansible_distribution == 'Ubuntu'
 
-    - name: Start MySQL service
+    - name: Install Nginx (Fedora)
       become: true
-      service:
-        name: mysql
+      dnf:
+        name: nginx
+        state: present
+      when: ansible_distribution == 'Fedora'
+
+    - name: Start Nginx service (Fedora)
+      become: true
+      systemd:
+        name: nginx
         state: started
         enabled: yes
+      when: ansible_distribution == 'Fedora'
+
+    - name: Install PostgreSQL and related packages (Fedora)
+      become: true
+      dnf:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - postgresql
+        - postgresql-contrib
+        - postgresql-devel
+      when: ansible_distribution == 'Fedora'
