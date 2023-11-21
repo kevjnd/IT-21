@@ -1,0 +1,30 @@
+---
+- name: Install Nginx and MySQL
+  hosts: hostmachine
+
+  tasks:
+    - name: Install Nginx
+      become: true
+      apt:
+        name: nginx
+        state: present
+
+    - name: Start Nginx service
+      become: true
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Install MySQL
+      become: true
+      apt:
+        name: mysql-server
+        state: present
+
+    - name: Start MySQL service
+      become: true
+      service:
+        name: mysql
+        state: started
+        enabled: yes
