@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quote Display</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mt-5">
+    <h1>Quotes</h1>
+    <button onclick="sortQuotesByAuthor()">Sort by Author</button>
+    <div id="loader" class="loader"></div>
+    <div id="quoteCards" class="row mt-4"></div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const quoteCardsContainer = document.getElementById('quoteCards');
+
+      async function getQuotes() {
+        try {
+          const response = await fetch('https://dummyjson.com/quotes');
+          if (!response.ok) {
+            throw new Error('Failed to fetch quotes');
+          }
+          const data = await response.json();
+          return data.quotes;
+        } catch (error) {
+          quoteCardsContainer.innerHTML = `<p>Failed to fetch quotes. Please try again later.</p>`;
+          console.error(error);
+        }
+      }
+
+      async function displayQuotes(sortBy) {
+        const quotes = await getQuotes();
+        if (Array.isArray(quotes)) {
+          if (sortBy === 'author') {
+            quotes.sort((a, b) => {
+              const authorA = a.author.toLowerCase();
+              const authorB = b.author.toLowerCase();
+              if (authorA < authorB) {
+                return -1;
+              }
+              if (authorA > authorB) {
+                return 1;
+              }
+              return 0;
+            });
+          }
+
+          quoteCardsContainer.innerHTML = ''; // Clear previous content
+          quotes.forEach(quote => {
+            const theme = quote.theme ? quote.theme : 'No specific theme';
+            const card = `
+              <div class="col-md-4 mb-4">
+                <div class="card">
+                  <div class="card-header">${quote.author}</div>
+                  <div class="card-body">
+                    <p class="card-text">${quote.quote}</p>
+                  </div>
+                  <div class="card-footer text-muted">${theme}</div>
+                </div>
+              </div>
+            `;
+            quoteCardsContainer.innerHTML += card;
+          });
+        } else {
+          quoteCardsContainer.innerHTML = `<p>Quotes data is not in the expected format.</p>`;
+        }
+      }
+
+      window.sortQuotesByAuthor = function () {
+        displayQuotes('author');
+      };
+
+      displayQuotes(); // Initially display quotes
+    });
+  </script>
+</body>
+</html>
