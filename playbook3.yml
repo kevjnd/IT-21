@@ -1,0 +1,40 @@
+---
+- name: Check and install firewall on managed machines
+  hosts: all
+  become: true
+  tasks:
+    - name: Check if firewalld is installed (for Red Hat-based systems)
+      command: "rpm -q firewalld"
+      register: firewalld_check
+      ignore_errors: true
+      when: ansible_facts['distribution'] == 'RedHat'
+
+    - name: Check if UFW is installed (for Debian-based systems)
+      command: "dpkg -l ufw"
+      register: ufw_check
+      ignore_errors: true
+      when: ansible_facts['distribution'] == 'Debian'
+
+    - name: Install firewalld (for Red Hat-based systems) if not present
+      package:
+        name: firewalld
+        state: present
+      when: firewalld_check is failed and ansible_facts['distribution'] == 'RedHat'
+
+    - name: Install UFW (for Debian-based systems) if not present
+      apt:
+        name: ufw
+        state: present
+      when: ufw_check is failed and ansible_facts['distribution'] == 'Debian'
+
+    - name: Start and enable firewalld service (for Red Hat-based systems)
+      service:
+        name: firewalld
+        state: started
+        enabled: yes
+      when: firewalld_check is succeeded and ansible_facts['distribution'] == 'RedHat'
+
+    - name: Enable UFW (for Debian-based systems)
+      command: "ufw --force enable"
+      when: ufw_check is succeeded and ansible_facts['distribution'] == 'Debian'
+...
