@@ -49,15 +49,12 @@
 
 document.addEventListener("DOMContentLoaded", function () {
     const themeButton = document.getElementById("theme");
-
-    // Kontrollime Local Storage'ist, kas kasutajal on varasem kujunduse valik
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme) {
         applyTheme(savedTheme);
     }
 
     themeButton.addEventListener("click", function () {
-        // Kui nupule klõpsatakse, muudame teemat ja salvestame Local Storage'i
         const currentTheme = themeButton.classList.contains("btn-dark") ? "dark" : "light";
         const newTheme = currentTheme === "dark" ? "light" : "dark";
 
