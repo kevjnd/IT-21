@@ -1,11 +1,4 @@
-// Krõbin
-// 23.10.2023
-// Ülesanne 5
-
-const temperatuur = 22; // Asenda temperatuur soovitud väärtusega
-const kasutajanimi = "admin"; // Asenda kasutajanimi soovitud väärtusega
-const piletitüüp = "sooduspilet"; // Asenda piletitüüp ("taispilet" või "sooduspilet")
-const vanus = 30; // Asenda vanus soovitud väärtusega
+const temperatuur = Math.floor(Math.random() * 45) + 1; // Suvaline temperatuur
 
 // 1. Temperatuur
 if (temperatuur > 25) {
@@ -17,6 +10,7 @@ if (temperatuur > 25) {
 }
 
 // 2. Kasutajanime kontroll
+const kasutajanimi = prompt("Sisesta kasutajanimi:");
 if (kasutajanimi === "admin") {
     console.log("Tere, administraator!");
 } else {
@@ -24,7 +18,9 @@ if (kasutajanimi === "admin") {
 }
 
 // 3. Ürituse piletite hind
-if (piletitüüp === "taispilet") {
+const piletitüüp = prompt("Sisesta piletitüüp ('täispilet' või 'sooduspilet'):");
+const vanus = prompt("Sisesta vanus:");
+if (piletitüüp === "täispilet") {
     if (vanus < 18) {
         console.log("Pileti hind: 10 eurot");
     } else if (vanus >= 18 && vanus <= 64) {
@@ -41,5 +37,5 @@ if (piletitüüp === "taispilet") {
         console.log("Sisestatud vanus ei sobi.");
     }
 } else {
-    console.log("Vigane piletitüüp. Kasuta 'taispilet' või 'sooduspilet'.");
+    console.log("Vigane piletitüüp. Kasuta 'täispilet' või 'sooduspilet'.");
 }

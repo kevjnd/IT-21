@@ -27,3 +27,17 @@ console.log("Koodi 35482977 indeks: " + koodiIndeks);
 let poolMassiivist = koodiMassiiv.slice(0, koodiMassiiv.length / 2);
 console.log("Pool massiivist: ");
 console.log(poolMassiivist);
+
+// Sportlaste tulemused
+let sportlased = [
+  ["Alice", 25, [10.2, 9.8, 10.5]],
+  ["Bob", 22, [9.5, 9.6, 9.7]],
+  ["Charlie", 28, [11.1, 11.2, 11.5]]
+];
+
+// Leia parim tulemus iga sportlase kohta ja kuva nimi ja parim tulemus
+for (let i = 0; i < sportlased.length; i++) {
+  let parimTulemus = Math.max(...sportlased[i][2]);
+  let nimi = sportlased[i][0];
+  console.log("Sportlane: " + nimi + ", Parim tulemus: " + parimTulemus);
+}

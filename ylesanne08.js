@@ -2,6 +2,7 @@
 // 23.10.2023
 // Ülesanne 8
 
+// 1. Mündid
 const coins = [200, 0.2, 10, 0.01, 2, 1, 0.1, 0.02, 0.05, 100, 5, 0.5, 50, 20];
 const sortedCoins = [];
 let totalCoins = 0;

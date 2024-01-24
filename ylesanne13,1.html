@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ülesanne 13</title>
+</head>
+<body>
+
+  <p id="eemaldaID" attr="Siia muu tekst"></p>
+
+  <script>
+//1. Atribuutide lugemine, muutmine ja eemaldamine
+    var element = document.getElementById("eemaldaID");
+    element.removeAttribute("id");
+    element.setAttribute("attr", "Krõbin");
+    var attrValue = element.getAttribute("attr");
+    console.log("Atribuudi väärtus: " + attrValue);
+  </script>
+
+</body>
+
+</html>

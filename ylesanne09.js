@@ -2,24 +2,60 @@
 // 23.10.2023
 // Ülesanne 9
 
-function minuNimi() {
-    return "Sinu Nimi (Klassikaline)";
+
+// 1. Erinevad funktsioonid
+function klassikaline() {
+  console.log("Krõbin");
+}
+const noolefunktsioon = () => {
+  console.log("Krõbin");
+};
+
+// 2. Argumendiga funktsioon
+function kuupaevEesti(kuupaevaString) {
+  const kuupaev = new Date(kuupaevaString.replace(/(\d{2}).(\d{2}).(\d{2})/, '20$3-$2-$1'));
+  const kuudEesti = [
+      "jaanuar", "veebruar", "märts", "aprill", "mai", "juuni",
+      "juuli", "august", "september", "oktoober", "november", "detsember"
+  ];
+
+  const paev = kuupaev.getDate();
+  const kuu = kuudEesti[kuupaev.getMonth()];
+  const aasta = kuupaev.getFullYear();
+
+  console.log(`Praegune kuupäev ja kuu eesti keeles: ${paev}. ${kuu} ${aasta}`);
+}
+
+// 3. Teadmata hulk
+function koguKeskmine() {
+  let arvudeSumma = 0;
+  let arvudeArv = 0;
+
+  while (true) {
+      const sisend = prompt("Sisesta täisarvud (lõpetamiseks sisesta mõni muu väärtus):");
+      
+      if (sisend === null || isNaN(parseInt(sisend))) {
+          break;
+      }
+
+      const arv = parseInt(sisend);
+      arvudeSumma += arv;
+      arvudeArv++;
   }
-  
-  const minuNimiNool = () => "Sinu Nimi (Noolefunktsioon)";
-  
-  function kuupaevEesti(kuupaev) {
-    const date = new Date(kuupaev);
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return date.toLocaleDateString('et-EE', options);
+
+  if (arvudeArv > 0) {
+      const keskmine = arvudeSumma / arvudeArv;
+      console.log(`Täisarvude koguarv: ${arvudeArv}`);
+      console.log(`Täisarvude keskmine: ${keskmine}`);
+      return { koguarv: arvudeArv, keskmine: keskmine };
+  } else {
+      console.log("Ühtegi täisarvu ei sisestatud.");
+      return null;
   }
+
+}
   
-  function arvudeKogusummaKeskmine(...arvud) {
-    const kogusumma = arvud.reduce((sum, arv) => sum + arv, 0);
-    const keskmine = kogusumma / arvud.length;
-    return { kogusumma, keskmine };
-  }
-  
+// 4. Salajane sõnum
   const salajaneSonum = (sonum) => {
     const taishaalikud = "AEIOUaeiou";
     for (let i = 0; i < sonum.length; i++) {
@@ -30,21 +66,24 @@ function minuNimi() {
     return sonum;
   }
   
-  const leiaUnikaalsedNimed = (nimedeMassiiv) => {
-    const unikaalsedNimed = [];
-    for (const nimi of nimedeMassiiv) {
-      if (!unikaalsedNimed.includes(nimi)) {
-        unikaalsedNimed.push(nimi);
+// 5. Unikaalsed nimed
+const leiaUnikaalsedNimed = (nimed) => {
+  const tulemus = [];
+
+  for (const nimi of nimed) {
+      if (!tulemus.includes(nimi)) {
+          tulemus.push(nimi);
       }
-    }
-    return unikaalsedNimed;
   }
+
+  return tulemus;
+};
   
-  console.log(minuNimi());
-  console.log(minuNimiNool());
-  console.log(kuupaevEesti("19.07.23"));
-  console.log(arvudeKogusummaKeskmine(5, 10, 15));
-  console.log(salajaneSonum("Tere tulemast"));
-  const nimed = ["Kati", "Mati", "Kati", "Mari", "Mati", "Jüri"];
-  console.log(leiaUnikaalsedNimed(nimed));
-  
+klassikaline();
+noolefunktsioon();
+kuupaevEesti("19.07.23");
+const tulemus = koguKeskmine();
+console.log(salajaneSonum("Tere maailm!"));
+const nimed = ["Kati", "Mati", "Kati", "Mari", "Mati", "Jüri"];
+const unikaalsedNimed = leiaUnikaalsedNimed(nimed);
+console.log(unikaalsedNimed);
