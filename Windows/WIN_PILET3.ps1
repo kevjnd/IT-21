@@ -1,9 +1,13 @@
-﻿# Laadi Active Directory moodul
+﻿# Kontrolli ja loo kaust, kui see ei eksisteeri
+if (-Not (Test-Path -Path "C:\Raportid")) {
+    New-Item -Path "C:\Raportid" -ItemType Directory
+}
+
+# Laadi Active Directory moodul
 Import-Module ActiveDirectory
 
 # CSV failide asukohad
 $LogimataKontodeFail = "C:\Raportid\LogimataKontod.csv"
-$LukustatudKontodeFail = "C:\Raportid\LukustatudKontod.csv"
 $KeelatudKontodeFail = "C:\Raportid\KeelatudKontod.csv"
 
 # Kontod, mis pole kunagi AD domeeni loginud
@@ -12,13 +16,6 @@ $LogimataKontod = Get-ADUser -Filter {LastLogonDate -notlike "*"} -Properties La
 
 # Salvesta tulemus CSV faili
 $LogimataKontod | Export-Csv -Path $LogimataKontodeFail -NoTypeInformation
-
-# Kontod, mis on lukustatud
-$LukustatudKontod = Search-ADAccount -LockedOut | 
-    Select-Object SamAccountName, Name
-
-# Salvesta tulemus CSV faili
-$LukustatudKontod | Export-Csv -Path $LukustatudKontodeFail -NoTypeInformation
 
 # Keelatud kontod
 $KeelatudKontod = Get-ADUser -Filter {Enabled -eq $false} -Properties Enabled | 
