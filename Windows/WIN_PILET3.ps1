@@ -1,9 +1,4 @@
-﻿# Kontrolli ja loo kaust, kui see ei eksisteeri
-if (-Not (Test-Path -Path "C:\Raportid")) {
-    New-Item -Path "C:\Raportid" -ItemType Directory
-}
-
-# Laadi Active Directory moodul
+﻿# Laadi Active Directory moodul
 Import-Module ActiveDirectory
 
 # CSV failide asukohad
