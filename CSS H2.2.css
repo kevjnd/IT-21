@@ -1,0 +1,120 @@
+/* ÜLDINE */
+*{
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0;
+    margin: 0;
+     /* #fff > #ffffff*/
+}
+
+.container{
+    max-width: 800px;
+    margin: auto;
+}
+
+/* PÄIS JA MENÜÜ */
+body{
+    background-color: #ededed;
+}
+.header{
+    background-color: white;
+    width: 100%;
+    line-height: 90px;
+}
+
+
+.header h1{
+    padding-left: 50px;
+    color: black;
+    
+}
+
+.menu{
+    display: block;
+    clear: both;
+    
+    height: 40px;
+    background-color: blue;
+}
+
+.menu ul{
+    width: 100%;
+    list-style-type: none;
+    line-height: 40px;
+}
+
+.menu ul li{
+    display: block;
+    float: left;
+    background-color: blue;
+    padding-left: 50px;
+}
+
+.menu a{
+    text-decoration: none;
+    color: whitesmoke;
+}
+
+.menu a:hover{
+    /*kunagi veel :active  :visited*/
+    color:#fff;
+}
+
+
+/* SISU */
+.content{
+    display: block;
+    clear: both;
+    padding: 15px;
+    background-color: #fff;
+}
+.content p{
+    font-size: 12;
+    line-height: 0px;
+}
+.content h1{
+    font-size: 30px;
+    font-weight: 20px;
+    padding: 5px;
+    padding-left: 0px;
+    padding-top: 0px;
+    color: green;
+}
+.content2 {
+    display: block;
+    clear: both;
+    padding: 15px;
+    background-color: #fff;
+}
+.content2 h2{
+    font-size: 20px;
+    font-weight: 400px;
+    padding: 15px ;
+    padding-left: 160px;
+    color: blue;
+    max-width: 30%;
+}
+.content2 p{
+    font-size: 12;
+    line-height: 20px;
+    max-width: 500px;
+    padding-left: 160px;
+    padding-bottom: 0px;
+
+}
+hr{
+    margin: 20px 0;
+
+}
+.content ul{
+    padding-left: 50px;
+}
+
+
+/* JALUS */
+.footer{
+    background-color: gray;
+    height: 40px;
+    color: black;
+    line-height: 40px;
+    padding-left: 700px;
+}
