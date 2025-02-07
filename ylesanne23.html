@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="et">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Sisselogimise nupp -->
+    <a href="ylesanne23login.html" class="btn btn-success" style="position: absolute; top: 10px; right: 10px;">Logi sisse</a>
+
+    <div class="container mt-5">
+        <h2>Postitused</h2>
+        <hr>
+        <div id="postitused"></div>
+    </div>
+
+    <!-- Kommentaaride vorm -->
+    <div class="container mt-3">
+        <form id="kommentaariVorm">
+            <h3>Lisa kommentaar</h3>
+            <div class="form-group">
+                <label for="nimi">Nimi</label>
+                <input type="text" class="form-control" id="nimi" required>
+            </div>
+            <div class="form-group">
+                <label for="hinnang">Hinnang (1-5)</label>
+                <input type="number" class="form-control" id="hinnang" min="1" max="5" required>
+            </div>
+            <div class="form-group">
+                <label for="kommentaar">Kommentaar</label>
+                <textarea class="form-control" id="kommentaar" rows="3" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Lisa kommentaar</button>
+        </form>
+    </div>
+
+    <!-- Kuvatavate kommentaaride koht -->
+    <div class="container mt-3">
+        <h3>Kommentaarid</h3>
+        <div id="kommentaarid"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";
+        import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc, onSnapshot, query, orderBy, updateDoc } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-firestore.js";
+
+        // Firebase konfiguratsioon
+        const firebaseConfig = {
+            apiKey: "API KEY",
+            authDomain: "ylesanne23js.firebaseapp.com",
+            projectId: "ylesanne23js",
+            storageBucket: "ylesanne23js.appspot.com",
+            messagingSenderId: "638931493901",
+            appId: "ID",
+            measurementId: "G-CH27484C1L"
+        };
+
+        initializeApp(firebaseConfig);
+
+        // Firestore andmebaasi ühendamine
+        const db = getFirestore();
+        const postitusedKogumik = collection(db, "postitused");
+        const kommentaaridKogumik = collection(db, "kommentaarid");
+
+        // Andmete lugemine ja kuvamine
+        onSnapshot(query(postitusedKogumik, orderBy('aeg', 'desc')), (snapshot) => {
+            const postitusedElement = document.getElementById('postitused');
+            postitusedElement.innerHTML = ''; // Tühjendame HTML sisu
+            snapshot.docs.forEach(dok => {
+                const data = dok.data();
+                const card = document.createElement('div');
+                card.className = 'card mb-3';
+                card.innerHTML = `
+                    <div class="card-header">${data.pealkiri}</div>
+                    <div class="card-body">
+                        <h5 class="card-title">${new Date(data.aeg.seconds * 1000).toLocaleDateString()}</h5>
+                        <p class="card-text">${data.tekst}</p>
+                    </div>
+                `;
+                postitusedElement.appendChild(card);
+            });
+        });
+
+        // Kommentaaride vormi kuulaja
+        const kommentaariVorm = document.getElementById('kommentaariVorm');
+        kommentaariVorm.addEventListener('submit', e => {
+            e.preventDefault();
+            const nimi = document.getElementById('nimi').value;
+            const hinnang = parseInt(document.getElementById('hinnang').value);
+            const kommentaar = document.getElementById('kommentaar').value;
+
+            // Kommentaari lisamine
+            addDoc(kommentaaridKogumik, {
+                nimi: nimi,
+                hinnang: hinnang,
+                kommentaar: kommentaar
+            })
+            .then(() => {
+                kommentaariVorm.reset();
+                location.reload();
+            })
+            .catch(err => {
+                console.log(err);
+            });
+        });
+
+        // Funktsioon kommentaaride laadimiseks ja kuvamiseks
+        function laeJaKuvaKommentaarid() {
+            const kommentaaridElement = document.getElementById('kommentaarid');
+            kommentaaridElement.innerHTML = '';
+
+            // Kuulaja kommentaaridele
+            onSnapshot(kommentaaridKogumik, (kommentaaridSnapshot) => {
+                kommentaaridSnapshot.docs.forEach(kommentaarDok => {
+                    const kommentaarData = kommentaarDok.data();
+                    const kommentaarCard = document.createElement('div');
+                    kommentaarCard.className = 'card mb-2';
+                    kommentaarCard.innerHTML = `
+                        <div class="card-body">
+                            <h5 class="card-title">${kommentaarData.nimi}</h5>
+                            <p class="card-text">Hinnang: ${kommentaarData.hinnang}</p>
+                            <p class="card-text">${kommentaarData.kommentaar}</p>
+                        </div>
+                    `;
+                    kommentaaridElement.appendChild(kommentaarCard);
+                });
+            });
+        }
+
+        laeJaKuvaKommentaarid();
+    </script>
+</body>
+</html>

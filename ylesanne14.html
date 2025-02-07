@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ülesanne 14</title>
+  <style>
+    .list-group-item-success {
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <ul class="list-group" id="myList">
+      <li class="list-group-item">Ootel: Lorem ipsum dolor sit amet</li>
+      <li class="list-group-item">Tehtud: Lorem ipsum dolor sit amet</li>
+      <li class="list-group-item">Viga: Lorem ipsum dolor sit amet</li>
+      <li class="list-group-item">Tehtud: Lorem ipsum dolor sit amet</li>
+      <li class="list-group-item">Tehtud: Lorem ipsum dolor sit amet</li>
+      <li class="list-group-item">Lorem ipsum dolor sit amet</li>
+      <li class="list-group-item">Viga: Lorem ipsum dolor sit amet</li>
+    </ul>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var listItems = document.getElementById('myList').querySelectorAll('.list-group-item');
+
+      listItems.forEach(function (item) {
+        var textContent = item.textContent.toLowerCase();
+
+        if (textContent.includes('ootel')) {
+          item.classList.add('list-group-item-warning');
+        } else if (textContent.includes('tehtud')) {
+          item.classList.add('list-group-item-success');
+        } else if (textContent.includes('viga')) {
+          item.classList.add('list-group-item-danger');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
