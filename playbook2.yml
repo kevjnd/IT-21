@@ -1,0 +1,56 @@
+---
+- name: Install Nginx and PostgreSQL
+  hosts: virtualmachines
+
+  tasks:
+    - name: Install Nginx
+      become: true
+      apt:
+        name: nginx
+        state: present
+      when: ansible_distribution == 'Ubuntu'
+
+    - name: Start Nginx service
+      become: true
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+      when: ansible_distribution == 'Ubuntu'
+
+    - name: Install PostgreSQL and related packages (Ubuntu)
+      become: true
+      apt:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - postgresql
+        - postgresql-contrib
+        - libpq-dev
+      when: ansible_distribution == 'Ubuntu'
+
+    - name: Install Nginx (Fedora)
+      become: true
+      dnf:
+        name: nginx
+        state: present
+      when: ansible_distribution == 'Fedora'
+
+    - name: Start Nginx service (Fedora)
+      become: true
+      systemd:
+        name: nginx
+        state: started
+        enabled: yes
+      when: ansible_distribution == 'Fedora'
+
+    - name: Install PostgreSQL and related packages (Fedora)
+      become: true
+      dnf:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - postgresql
+        - postgresql-contrib
+        - postgresql-devel
+      when: ansible_distribution == 'Fedora'
