@@ -9,7 +9,7 @@ Siin asuvad IT-21 kursuse koolitööd erinevates programmeerimiskeeltes ja tarkv
 - **SolidEdge**
 - **HTML**
 - **CSS**
-- **GoDot**
+- **Godot**
 - **Andmebaasid**
 
 Kõik ülesanded pärinevad järgmiselt lingilt: [metshein.com](http://metshein.com)
